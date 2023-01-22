@@ -1,4 +1,6 @@
 import React, {FC, ReactNode} from "react";
+import Header from "./Header";
+import Footer from "./Footer";
 
 interface Props {
     children?: ReactNode
@@ -7,11 +9,14 @@ interface Props {
 const Layout: FC<Props> = ({children}) => {
 
     return (
-        <main
-            className={`min-w-screen flex min-h-screen flex-col items-center justify-center gap-10 p-10 font-roboto bg-cover bg-no-repeat bg-brown-wave`}
-        >
-            {children}
-        </main>
+        <div
+            className={'min-w-screen min-h-screen flex flex-col items-center justify-center p-10 font-roboto bg-cover bg-no-repeat bg-brown-wave'}>
+            <Header/>
+            <main>
+                {children}
+            </main>
+            <Footer/>
+        </div>
     );
 };
 
