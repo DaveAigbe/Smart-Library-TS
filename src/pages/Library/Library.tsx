@@ -6,7 +6,7 @@ interface Props {}
 
 const Library: FunctionComponent<Props> = () => {
   return (
-    <section>
+    <section className={"flex flex-col items-center justify-center"}>
       <Introduction />
       <VideosContainer />
     </section>

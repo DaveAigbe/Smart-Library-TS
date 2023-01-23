@@ -7,7 +7,7 @@ const Footer: FunctionComponent<Props> = () => {
   return (
     <footer
       className={
-        "fixed bottom-0 left-0 right-0 flex items-center justify-center gap-5 bg-brown-400 text-main-txt"
+        "fixed inset-x-0 bottom-0 flex items-center justify-center gap-5 bg-brown-400 text-main-txt"
       }
     >
       <p className={"text-sm"}>© Copyright 2023 by Dave Aigbe</p>
