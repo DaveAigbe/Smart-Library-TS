@@ -1,13 +1,15 @@
 import React, { FunctionComponent } from "react";
 import Introduction from "../../components/Introduction";
+import VideosContainer from "./Videos/VideosContainer";
 
 interface Props {}
 
 const Library: FunctionComponent<Props> = () => {
   return (
-    <div>
+    <section>
       <Introduction />
-    </div>
+      <VideosContainer />
+    </section>
   );
 };
 

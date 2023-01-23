@@ -3,7 +3,7 @@ import Description from "../pages/Home/Description";
 import { Icon } from "@iconify/react";
 import BigButton from "./BigButton";
 import { Link } from "react-router-dom";
-import AddVideoForm from "../pages/Library/AddVideoForm";
+import AddVideoForm from "../pages/Library/Forms/AddVideoForm";
 import onHomepage from "../utils/onHomepage";
 
 interface Props {}
