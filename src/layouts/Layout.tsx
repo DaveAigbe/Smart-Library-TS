@@ -1,23 +1,22 @@
-import React, {FC, ReactNode} from "react";
-import Header from "./Header";
+import React, { FC, ReactNode } from "react";
 import Footer from "./Footer";
 
 interface Props {
-    children?: ReactNode
+  children?: ReactNode;
 }
 
-const Layout: FC<Props> = ({children}) => {
-
-    return (
-        <div
-            className={'min-w-screen min-h-screen flex flex-col items-center justify-center p-10 font-roboto bg-cover bg-no-repeat bg-brown-wave'}>
-            <Header/>
-            <main>
-                {children}
-            </main>
-            <Footer/>
-        </div>
-    );
+const Layout: FC<Props> = ({ children }) => {
+  return (
+    <div
+      className={
+        "min-w-screen flex min-h-screen flex-col items-center justify-center overflow-hidden bg-brown-wave bg-cover bg-no-repeat p-10 font-proxima"
+      }
+    >
+      {/*<Header/>*/}
+      <main>{children}</main>
+      <Footer />
+    </div>
+  );
 };
 
-export default Layout
+export default Layout;

@@ -1,20 +1,19 @@
-import React, {FunctionComponent} from 'react';
-import Introduction from "./Introduction";
-import {Link} from "react-router-dom";
-import BigButton from "../../components/BigButton";
+import React, { FunctionComponent } from "react";
+import Introduction from "../../components/Introduction";
 
-interface Props {
-}
+interface Props {}
 
 const Home: FunctionComponent<Props> = () => {
-    return (
-        <div className={'flex justify-center items-center flex-col'}>
-            <Introduction/>
-            <Link to={'library'}>
-                <BigButton content={"Continue to Library ➔"}/>
-            </Link>
-        </div>
-    );
+  return (
+    <div className={"relative flex flex-col items-center justify-center"}>
+      <Introduction />
+      <img
+        className={"absolute -right-2/4 z-0 w-1300"}
+        src={"public/images/pink-books.svg"}
+        alt={"Person grabbing globe shaped light bulb"}
+      />
+    </div>
+  );
 };
 
 export default Home;

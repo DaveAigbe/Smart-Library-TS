@@ -1,7 +1,7 @@
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Account from "../pages/Account";
 import Home from "../pages/Home/Home";
-import Library from "../pages/Library";
+import Library from "../pages/Library/Library";
 import Layout from "../layouts/Layout";
 
 function App() {

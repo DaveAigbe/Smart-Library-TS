@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         roboto: ["Roboto", "sans-serif"],
+        proxima: ["Proxima Nova", "sans-serif"]
       },
       width: {
         1300: "81.25rem",
