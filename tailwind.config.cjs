@@ -68,7 +68,7 @@ module.exports = {
           txt: '#271c19',
           hlt: '#e78fb3',
         }
-      }
+      },
     },
   },
   plugins: [],
