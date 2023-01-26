@@ -6,7 +6,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormError from "../../../components/FormError";
-import { VideoID } from "../../../types/videoID";
+import { VideoID } from "../../../types/VideoID";
 import { isUniqueID } from "../../../utils/isUniqueID";
 
 interface Props {}

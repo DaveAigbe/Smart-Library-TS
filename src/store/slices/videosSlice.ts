@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { Videos } from "../../types/videos";
+import { Videos } from "../../types/Videos";
 import defaultVideos from "../../data/defaults";
 
 interface InitialState {

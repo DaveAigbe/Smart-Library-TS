@@ -1,16 +1,17 @@
 import React, { FunctionComponent } from "react";
 import { Icon } from "@iconify/react";
-import useIsHomepage from "../hooks/useIsHomepage";
+import useIsLibraryPage from "../hooks/useIsLibraryPage";
 import GenresTooltip from "../pages/Library/Genres/GenresTooltip";
 import AddGenreButton from "../pages/Library/Genres/Buttons/AddGenreButton";
 import GenreButton from "../pages/Library/Genres/Buttons/GenreButton";
+import Profile from "../pages/Library/Profile";
 
 interface Props {}
 
 const Header: FunctionComponent<Props> = () => {
   return (
     <>
-      {!useIsHomepage() ? (
+      {useIsLibraryPage() ? (
         <header className={"fixed inset-x-0 top-0 z-20 bg-brown-400 p-1.5"}>
           <section className={"flex items-center justify-between"}>
             <section className={"flex items-center"}>
@@ -32,18 +33,7 @@ const Header: FunctionComponent<Props> = () => {
                 <GenreButton text={"Python"} />
               </nav>
             </section>
-            <section
-              className={
-                "ml-5 flex items-center justify-center text-white md:right-5"
-              }
-            >
-              <Icon
-                className={
-                  "text-3xl transition duration-300 ease-in-out hover:text-blue-600"
-                }
-                icon="bi:person-circle"
-              />
-            </section>
+            <Profile username={"Dave"} />
           </section>
         </header>
       ) : (

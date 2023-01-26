@@ -1,4 +1,4 @@
-import { Videos } from "../types/videos";
+import { Videos } from "../types/Videos";
 
 const defaultVideos: Videos = {
   all: {
