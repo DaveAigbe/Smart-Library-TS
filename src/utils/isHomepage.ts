@@ -1,9 +1,9 @@
 import { Location, useLocation } from "react-router-dom";
 
-const onHomepage = (): boolean => {
+const isHomepage = (): boolean => {
   const location: Location = useLocation();
 
   return location.pathname === "/";
 };
 
-export default onHomepage;
+export default isHomepage;

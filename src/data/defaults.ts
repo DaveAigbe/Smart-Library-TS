@@ -46,4 +46,4 @@ const defaultVideos: Videos = {
   },
 };
 
-export { defaultVideos };
+export default defaultVideos;
