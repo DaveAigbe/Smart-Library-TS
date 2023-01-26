@@ -1,7 +1,6 @@
 import React, { FC, ReactNode } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
-import useIsHomepage from "../hooks/useIsHomepage";
 
 interface Props {
   children?: ReactNode;
@@ -11,11 +10,11 @@ const Layout: FC<Props> = ({ children }) => {
   return (
     <div
       className={
-        "min-w-screen flex min-h-screen flex-col items-center justify-center overflow-hidden bg-brown-wave bg-cover bg-no-repeat p-10 font-proxima"
+        "min-w-screen flex min-h-screen flex-col items-center justify-between overflow-hidden bg-brown-wave bg-cover bg-no-repeat font-proxima"
       }
     >
-      {!useIsHomepage() && <Header />}
-      <main>{children}</main>
+      <Header />
+      <main className={"p-10"}>{children}</main>
       <Footer />
     </div>
   );
