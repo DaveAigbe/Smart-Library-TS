@@ -1,35 +1,46 @@
 import React, { FunctionComponent } from "react";
 import BigButton from "../../../components/BigButton";
-import { useDispatch } from "react-redux";
-import { addVideo } from "../../../store/slices/videosSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addVideo, selectVideos } from "../../../store/slices/videosSlice";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormError from "../../../components/FormError";
+import { VideoID } from "../../../types/videoID";
+import { isUniqueID } from "../../../utils/isUniqueID";
 
 interface Props {}
 
 const AddVideoForm: FunctionComponent<Props> = () => {
-  // Describe Shape of Input
-  const schema = yup.object().shape({
-    videoId: yup.string().length(11, "⚠ ID must be 11 characters").required(),
+  const videoIDSchema = yup.object().shape({
+    videoID: yup
+      .string()
+      .length(11, "⚠ ID must be 11 characters")
+      .required()
+      .test({
+        name: "unique",
+        message: "⚠ Video already exists in library",
+        test: (value) => isUniqueID(value, videos),
+      }),
   });
 
+  const videos = useSelector(selectVideos);
   const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     setValue,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+    formState: { isDirty, errors },
+  } = useForm<VideoID>({
+    defaultValues: { videoID: "" },
+    resolver: yupResolver(videoIDSchema),
   });
 
-  const handleSubmitVideo = (data: any) => {
-    const id: string = data.videoId;
+  const handleSubmitVideo = (data: VideoID) => {
+    const id = data.videoID;
     dispatch(addVideo(id));
 
-    setValue("videoId", "");
+    setValue("videoID", "");
   };
 
   return (
@@ -41,9 +52,11 @@ const AddVideoForm: FunctionComponent<Props> = () => {
         type="text"
         className={"h-14 w-full rounded bg-white p-4 md:w-96 "}
         placeholder={"ID"}
-        {...register("videoId")}
+        {...register("videoID")}
       />
-      {errors.videoId && <FormError errorMessage={errors.videoId.message} />}
+      {isDirty && errors?.videoID?.message && (
+        <FormError errorMessage={errors.videoID.message} />
+      )}
       <BigButton content={"Save Video"} />
     </form>
   );

@@ -6,4 +6,4 @@ interface Videos {
   [genre: string]: Ids;
 }
 
-export type { Ids, Videos };
+export type { Videos };

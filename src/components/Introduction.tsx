@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react";
 import BigButton from "./BigButton";
 import { Link } from "react-router-dom";
 import AddVideoForm from "../pages/Library/Forms/AddVideoForm";
-import isHomepage from "../utils/isHomepage";
+import useIsHomepage from "../hooks/useIsHomepage";
 
 interface Props {}
 
@@ -29,9 +29,9 @@ const Introduction: FunctionComponent<Props> = () => {
         }
       >
         <Description />
-        {!isHomepage() && <AddVideoForm />}
+        {!useIsHomepage() && <AddVideoForm />}
       </div>
-      {isHomepage() && (
+      {useIsHomepage() && (
         <Link to={"library"} className={"mt-10"}>
           <BigButton content={"Continue to Library ➔"} />
         </Link>
