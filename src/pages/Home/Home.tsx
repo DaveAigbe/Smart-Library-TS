@@ -9,7 +9,7 @@ const Home: FunctionComponent<Props> = () => {
       <Introduction />
       <img
         className={"absolute -right-2/4 z-0 w-1300"}
-        src={"public/images/pink-books.svg"}
+        src={"/images/pink-books.svg"}
         alt={"Person grabbing globe shaped light bulb"}
       />
     </section>
