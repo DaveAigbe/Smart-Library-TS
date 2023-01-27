@@ -19,5 +19,5 @@ export const genresSlice: Slice = createSlice({
 
 export const selectGenres = (state: RootState) => state.genres.genres;
 
-// export const {} = genresSlice.actions;
+export const {} = genresSlice.actions;
 export default genresSlice.reducer;
