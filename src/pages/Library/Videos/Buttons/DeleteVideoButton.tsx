@@ -1,8 +1,10 @@
 import React, { FunctionComponent } from "react";
 import { Icon } from "@iconify/react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteVideo } from "../../../../store/slices/videosSlice";
-import { selectGenres } from "../../../../store/slices/genresSlice";
+import {
+  deleteVideo,
+  selectGenres,
+} from "../../../../store/slices/librarySlice";
 
 interface Props {
   id: string;

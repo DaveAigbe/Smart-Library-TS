@@ -2,10 +2,12 @@ import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { Videos } from "../../types/Videos";
 import defaultVideos from "../../data/defaults";
+import { Genres } from "../../types/Genres";
 
 interface InitialState {
   videos: Videos;
   currentGenre: string;
+  genres: Genres<Videos>;
 }
 
 interface DeletePayload {
@@ -16,9 +18,10 @@ interface DeletePayload {
 const initialState: InitialState = {
   currentGenre: "all",
   videos: defaultVideos,
+  genres: ["all", "react", "java", "node"],
 };
 
-export const videosSlice: Slice = createSlice({
+export const librarySlice: Slice = createSlice({
   name: "videos",
   initialState,
   reducers: {
@@ -43,16 +46,23 @@ export const videosSlice: Slice = createSlice({
     changeGenre: (state, action: PayloadAction<keyof Videos>) => {
       state.currentGenre = action.payload;
     },
+    addGenre: (state, action: PayloadAction<string>) => {
+      state.genres = [...state.genres, action.payload];
+      state.videos = { ...state.videos, [action.payload]: { ids: [] } };
+    },
   },
 });
 
 export const selectVideos = (state: RootState): string[] => {
-  return state.videos.videos[state.videos.currentGenre].ids;
+  return state.library.videos[state.library.currentGenre].ids;
 };
 
 export const selectCurrentGenre = (state: RootState): string => {
-  return state.videos.currentGenre;
+  return state.library.currentGenre;
 };
 
-export const { addVideo, deleteVideo, changeGenre } = videosSlice.actions;
-export default videosSlice.reducer;
+export const selectGenres = (state: RootState) => state.library.genres;
+
+export const { addVideo, deleteVideo, changeGenre, addGenre } =
+  librarySlice.actions;
+export default librarySlice.reducer;

@@ -1,11 +1,13 @@
 import React, { FunctionComponent } from "react";
 import { Icon } from "@iconify/react";
 
-interface Props {}
+interface Props {
+  openForm: () => void;
+}
 
-const AddGenreButton: FunctionComponent<Props> = () => {
+const AddGenreButton: FunctionComponent<Props> = ({ openForm }) => {
   return (
-    <div>
+    <div onClick={openForm}>
       <Icon
         className={
           "cursor-pointer self-center text-4xl text-white transition-all duration-150 ease-in-out hover:text-main-hlt "

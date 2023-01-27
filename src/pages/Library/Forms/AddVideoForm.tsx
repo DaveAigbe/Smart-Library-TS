@@ -1,15 +1,18 @@
 import React, { FunctionComponent } from "react";
 import BigButton from "../../../components/BigButton";
 import { useDispatch, useSelector } from "react-redux";
-import { addVideo, selectVideos } from "../../../store/slices/videosSlice";
+import { addVideo, selectVideos } from "../../../store/slices/librarySlice";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormError from "../../../components/FormError";
-import { VideoID } from "../../../types/VideoID";
-import { isUniqueID } from "../../../utils/isUniqueID";
+import { isUniqueValue } from "../../../utils/isUniqueValue";
 
 interface Props {}
+
+interface FormData {
+  videoID: string;
+}
 
 const AddVideoForm: FunctionComponent<Props> = () => {
   const videoIDSchema = yup.object().shape({
@@ -20,7 +23,7 @@ const AddVideoForm: FunctionComponent<Props> = () => {
       .test({
         name: "unique",
         message: "⚠ Video already exists in library",
-        test: (value) => isUniqueID(value, videos),
+        test: (value) => isUniqueValue(value, videos),
       }),
   });
 
@@ -31,12 +34,12 @@ const AddVideoForm: FunctionComponent<Props> = () => {
     handleSubmit,
     setValue,
     formState: { isDirty, errors },
-  } = useForm<VideoID>({
+  } = useForm<FormData>({
     defaultValues: { videoID: "" },
     resolver: yupResolver(videoIDSchema),
   });
 
-  const handleSubmitVideo = (data: VideoID) => {
+  const handleSubmitVideo = (data: FormData) => {
     const id = data.videoID;
     dispatch(addVideo(id));
 

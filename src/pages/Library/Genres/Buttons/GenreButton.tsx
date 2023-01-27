@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   changeGenre,
   selectCurrentGenre,
-} from "../../../../store/slices/videosSlice";
+} from "../../../../store/slices/librarySlice";
 import titleCase from "../../../../utils/titleCase";
 
 interface Props {

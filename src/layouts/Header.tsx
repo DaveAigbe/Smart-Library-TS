@@ -5,10 +5,13 @@ import GenresTooltip from "../pages/Library/Genres/GenresTooltip";
 import AddGenreButton from "../pages/Library/Genres/Buttons/AddGenreButton";
 import Profile from "../pages/Library/Profile";
 import GenresContainer from "../pages/Library/Genres/GenresContainer";
+import AddGenreForm from "../pages/Library/Genres/Forms/AddGenreForm";
+import { useToggleActive } from "../hooks/useToggleActive";
 
 interface Props {}
 
 const Header: FunctionComponent<Props> = () => {
+  const [formActive, toggleFormActive] = useToggleActive();
   return (
     <>
       {useIsLibraryPage() ? (
@@ -26,10 +29,13 @@ const Header: FunctionComponent<Props> = () => {
               </section>
               <nav className={"flex gap-1"}>
                 <GenresTooltip>
-                  <AddGenreButton />
+                  <AddGenreButton openForm={toggleFormActive} />
                 </GenresTooltip>
                 <GenresContainer />
               </nav>
+              {formActive && (
+                <AddGenreForm toggleFormActive={toggleFormActive} />
+              )}
             </section>
             <Profile username={"Dave"} />
           </section>
