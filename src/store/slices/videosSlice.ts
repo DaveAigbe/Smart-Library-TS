@@ -46,8 +46,13 @@ export const videosSlice: Slice = createSlice({
   },
 });
 
-export const selectVideos = (state: RootState) =>
-  state.videos.videos[state.videos.currentGenre].ids;
+export const selectVideos = (state: RootState): string[] => {
+  return state.videos.videos[state.videos.currentGenre].ids;
+};
+
+export const selectCurrentGenre = (state: RootState): string => {
+  return state.videos.currentGenre;
+};
 
 export const { addVideo, deleteVideo, changeGenre } = videosSlice.actions;
 export default videosSlice.reducer;
