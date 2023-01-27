@@ -3,6 +3,7 @@ import DeleteVideoButton from "./Buttons/DeleteVideoButton";
 import AddVideoToGenreButton from "./Buttons/AddVideoToGenreButton";
 import Video from "./Video";
 import { useToggleActive } from "../../../hooks/useToggleActive";
+import AddVideoToGenreForm from "./Forms/AddVideoToGenreForm";
 
 interface Props {
   id: string;
@@ -10,11 +11,14 @@ interface Props {
 
 const VideoThumbnail: FunctionComponent<Props> = ({ id }) => {
   const [videoActive, toggleVideoActive] = useToggleActive();
+  const [formActive, toggleFormActive] = useToggleActive();
 
   return (
     <section
       className={`relative ${
-        !videoActive && "transition-all ease-in-out hover:scale-105"
+        !videoActive &&
+        !formActive &&
+        "transition-all ease-in-out hover:scale-105"
       }`}
     >
       <img
@@ -27,9 +31,12 @@ const VideoThumbnail: FunctionComponent<Props> = ({ id }) => {
       />
       <section>
         <DeleteVideoButton id={id} />
-        <AddVideoToGenreButton />
+        <AddVideoToGenreButton openForm={toggleFormActive} />
       </section>
       {videoActive && <Video id={id} toggleVideoActive={toggleVideoActive} />}
+      {formActive && (
+        <AddVideoToGenreForm toggleFormActive={toggleFormActive} id={id} />
+      )}
     </section>
   );
 };

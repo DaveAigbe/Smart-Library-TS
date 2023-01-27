@@ -2,11 +2,12 @@ import React, { Fragment, FunctionComponent } from "react";
 import GenreButton from "./Buttons/GenreButton";
 import { useSelector } from "react-redux";
 import { selectGenres } from "../../../store/slices/librarySlice";
+import { Genres } from "../../../types/Genres";
 
 interface Props {}
 
 const GenresContainer: FunctionComponent<Props> = () => {
-  const genres = useSelector(selectGenres);
+  const genres: Genres = useSelector(selectGenres);
 
   return (
     <section className={"flex gap-1"}>

@@ -5,14 +5,15 @@ import {
   deleteVideo,
   selectGenres,
 } from "../../../../store/slices/librarySlice";
+import { Genres } from "../../../../types/Genres";
 
 interface Props {
   id: string;
 }
 
 const DeleteVideoButton: FunctionComponent<Props> = ({ id }) => {
+  const genres: Genres = useSelector(selectGenres);
   const dispatch = useDispatch();
-  const genres = useSelector(selectGenres);
 
   return (
     <button onClick={() => dispatch(deleteVideo({ id: id, genres }))}>

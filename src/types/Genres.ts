@@ -1,3 +1,4 @@
-type Genres<T extends object> = (keyof T)[];
+type Genres = string[];
+// PropertyKey type
 
 export type { Genres };

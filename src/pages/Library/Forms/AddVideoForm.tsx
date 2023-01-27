@@ -1,7 +1,10 @@
 import React, { FunctionComponent } from "react";
 import BigButton from "../../../components/BigButton";
 import { useDispatch, useSelector } from "react-redux";
-import { addVideo, selectVideos } from "../../../store/slices/librarySlice";
+import {
+  addVideo,
+  selectCurrentVideos,
+} from "../../../store/slices/librarySlice";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -23,11 +26,11 @@ const AddVideoForm: FunctionComponent<Props> = () => {
       .test({
         name: "unique",
         message: "⚠ Video already exists in library",
-        test: (value) => isUniqueValue(value, videos),
+        test: (value) => isUniqueValue(value, currentVideos),
       }),
   });
 
-  const videos = useSelector(selectVideos);
+  const currentVideos: string[] = useSelector(selectCurrentVideos);
   const dispatch = useDispatch();
   const {
     register,

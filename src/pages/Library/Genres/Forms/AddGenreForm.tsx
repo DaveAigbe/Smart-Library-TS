@@ -9,6 +9,7 @@ import { addGenre, selectGenres } from "../../../../store/slices/librarySlice";
 import CloseFormButton from "../../../../components/CloseFormButton";
 import FormError from "../../../../components/FormError";
 import { isUniqueValue } from "../../../../utils/isUniqueValue";
+import { Genres } from "../../../../types/Genres";
 
 interface Props {
   toggleFormActive: () => void;
@@ -19,8 +20,8 @@ interface FormData {
 }
 
 const AddGenreForm: FunctionComponent<Props> = ({ toggleFormActive }) => {
+  const genres: Genres = useSelector(selectGenres);
   const dispatch = useDispatch();
-  const genres = useSelector(selectGenres);
 
   const schema = yup.object().shape({
     genre: yup
