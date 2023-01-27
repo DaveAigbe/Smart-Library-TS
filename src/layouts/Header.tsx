@@ -3,8 +3,8 @@ import { Icon } from "@iconify/react";
 import useIsLibraryPage from "../hooks/useIsLibraryPage";
 import GenresTooltip from "../pages/Library/Genres/GenresTooltip";
 import AddGenreButton from "../pages/Library/Genres/Buttons/AddGenreButton";
-import GenreButton from "../pages/Library/Genres/Buttons/GenreButton";
 import Profile from "../pages/Library/Profile";
+import GenresContainer from "../pages/Library/Genres/GenresContainer";
 
 interface Props {}
 
@@ -28,9 +28,7 @@ const Header: FunctionComponent<Props> = () => {
                 <GenresTooltip>
                   <AddGenreButton />
                 </GenresTooltip>
-                <GenreButton text={"React"} />
-                <GenreButton text={"Java"} />
-                <GenreButton text={"Python"} />
+                <GenresContainer />
               </nav>
             </section>
             <Profile username={"Dave"} />
@@ -43,5 +41,4 @@ const Header: FunctionComponent<Props> = () => {
   );
 };
 
-// rounded-lg px-5 py-2.5 text-center text-sm tracking-wide text-main-pg
 export default Header;

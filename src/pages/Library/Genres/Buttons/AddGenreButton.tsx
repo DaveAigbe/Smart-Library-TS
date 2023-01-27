@@ -8,7 +8,7 @@ const AddGenreButton: FunctionComponent<Props> = () => {
     <div>
       <Icon
         className={
-          "cursor-pointer self-center text-4xl text-white transition-all ease-in-out hover:text-main-hlt"
+          "cursor-pointer self-center text-4xl text-white transition-all duration-150 ease-in-out hover:text-main-hlt "
         }
         icon="ant-design:plus-square-twotone"
       />

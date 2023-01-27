@@ -2,14 +2,16 @@ import React, { FunctionComponent } from "react";
 
 interface Props {
   id: string;
+  toggleVideoActive: () => void;
 }
 
-const Video: FunctionComponent<Props> = ({ id }) => {
+const Video: FunctionComponent<Props> = ({ id, toggleVideoActive }) => {
   return (
     <figure
       className={
         "fixed top-0 right-0 z-10 flex h-screen w-screen items-center justify-center bg-gray-600/25 backdrop-blur-md"
       }
+      onClick={toggleVideoActive}
     >
       <iframe
         className={

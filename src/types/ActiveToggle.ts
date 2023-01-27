@@ -1,6 +1,3 @@
-interface ActiveToggle {
-  isActive: boolean;
-  toggleActive: () => void;
-}
+type ActiveToggle = [isActive: boolean, toggleActive: () => void];
 
 export type { ActiveToggle };

@@ -8,5 +8,5 @@ export const useToggleActive = (initial = false): ActiveToggle => {
     setIsActive((prevState) => !prevState);
   };
 
-  return { isActive, toggleActive };
+  return [isActive, toggleActive];
 };
