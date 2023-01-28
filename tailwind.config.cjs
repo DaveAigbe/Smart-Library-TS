@@ -67,6 +67,7 @@ module.exports = {
           pg: '#fff3ec',
           txt: '#271c19',
           hlt: '#e78fb3',
+          hlthover: '#d57ba7'
         }
       },
     },

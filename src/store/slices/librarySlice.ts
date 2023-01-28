@@ -3,7 +3,7 @@ import { RootState } from "../store";
 import { Videos } from "../../types/Videos";
 import defaultVideos from "../../data/defaults";
 import { Genres } from "../../types/Genres";
-import { AddToGenreFormData } from "../../pages/Library/Videos/Forms/AddVideoToGenreForm";
+import { AddToGenreFormData } from "../../pages/Library/Videos/Forms/AddVideoToGenreFormModal";
 
 interface InitialState {
   videos: Videos;

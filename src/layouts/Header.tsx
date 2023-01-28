@@ -3,15 +3,17 @@ import { Icon } from "@iconify/react";
 import useIsLibraryPage from "../hooks/useIsLibraryPage";
 import GenresTooltip from "../pages/Library/Genres/GenresTooltip";
 import AddGenreButton from "../pages/Library/Genres/Buttons/AddGenreButton";
-import Profile from "../pages/Library/Profile";
+import Profile from "../pages/Library/Profile/Profile";
 import GenresContainer from "../pages/Library/Genres/GenresContainer";
-import AddGenreForm from "../pages/Library/Genres/Forms/AddGenreForm";
+import AddGenreFormModal from "../pages/Library/Genres/Forms/AddGenreFormModal";
 import { useToggleActive } from "../hooks/useToggleActive";
+import LoginButton from "../pages/Library/Profile/Buttons/LoginButton";
 
 interface Props {}
 
 const Header: FunctionComponent<Props> = () => {
   const [formActive, toggleFormActive] = useToggleActive();
+  const [loggedIn, toggleLoggedIn] = useToggleActive(true);
   return (
     <>
       {useIsLibraryPage() ? (
@@ -34,10 +36,14 @@ const Header: FunctionComponent<Props> = () => {
                 <GenresContainer />
               </nav>
               {formActive && (
-                <AddGenreForm toggleFormActive={toggleFormActive} />
+                <AddGenreFormModal toggleFormActive={toggleFormActive} />
               )}
             </section>
-            <Profile username={"Dave"} />
+            {loggedIn ? (
+              <Profile username={"Dave"} logout={toggleLoggedIn} />
+            ) : (
+              <LoginButton login={toggleLoggedIn} />
+            )}
           </section>
         </header>
       ) : (

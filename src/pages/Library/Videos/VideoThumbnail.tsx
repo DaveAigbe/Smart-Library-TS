@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from "react";
 import DeleteVideoButton from "./Buttons/DeleteVideoButton";
 import AddVideoToGenreButton from "./Buttons/AddVideoToGenreButton";
-import Video from "./Video";
+import VideoModal from "./VideoModal";
 import { useToggleActive } from "../../../hooks/useToggleActive";
-import AddVideoToGenreForm from "./Forms/AddVideoToGenreForm";
+import AddVideoToGenreFormModal from "./Forms/AddVideoToGenreFormModal";
 
 interface Props {
   id: string;
@@ -33,9 +33,11 @@ const VideoThumbnail: FunctionComponent<Props> = ({ id }) => {
         <DeleteVideoButton id={id} />
         <AddVideoToGenreButton openForm={toggleFormActive} />
       </section>
-      {videoActive && <Video id={id} toggleVideoActive={toggleVideoActive} />}
+      {videoActive && (
+        <VideoModal id={id} toggleVideoActive={toggleVideoActive} />
+      )}
       {formActive && (
-        <AddVideoToGenreForm toggleFormActive={toggleFormActive} id={id} />
+        <AddVideoToGenreFormModal toggleFormActive={toggleFormActive} id={id} />
       )}
     </section>
   );

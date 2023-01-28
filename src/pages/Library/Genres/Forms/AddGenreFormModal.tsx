@@ -19,7 +19,7 @@ interface FormData {
   genre: string;
 }
 
-const AddGenreForm: FunctionComponent<Props> = ({ toggleFormActive }) => {
+const AddGenreFormModal: FunctionComponent<Props> = ({ toggleFormActive }) => {
   const genres: Genres = useSelector(selectGenres);
   const dispatch = useDispatch();
 
@@ -65,7 +65,7 @@ const AddGenreForm: FunctionComponent<Props> = ({ toggleFormActive }) => {
             New Genre
           </label>
           <section className={"flex justify-between gap-2"}>
-            <section>
+            <p>
               <input
                 id={"genre"}
                 className={
@@ -79,7 +79,7 @@ const AddGenreForm: FunctionComponent<Props> = ({ toggleFormActive }) => {
               {isDirty && errors?.genre?.message && (
                 <FormError errorMessage={errors.genre.message} />
               )}
-            </section>
+            </p>
             <SubmitFormButton label={"Create"} />
           </section>
           <CloseFormButton closeForm={toggleFormActive} />
@@ -89,4 +89,4 @@ const AddGenreForm: FunctionComponent<Props> = ({ toggleFormActive }) => {
   );
 };
 
-export default AddGenreForm;
+export default AddGenreFormModal;

@@ -22,7 +22,7 @@ interface AddToGenreFormData {
   [K: string]: boolean;
 }
 
-const AddVideoToGenreForm: FunctionComponent<Props> = ({
+const AddVideoToGenreFormModal: FunctionComponent<Props> = ({
   toggleFormActive,
   id,
 }) => {
@@ -79,6 +79,6 @@ const AddVideoToGenreForm: FunctionComponent<Props> = ({
   );
 };
 
-export default AddVideoToGenreForm;
+export default AddVideoToGenreFormModal;
 
 export type { AddToGenreFormData };

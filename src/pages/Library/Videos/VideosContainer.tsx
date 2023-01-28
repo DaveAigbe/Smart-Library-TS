@@ -9,7 +9,9 @@ interface Props {}
 const VideosContainer: FunctionComponent<Props> = () => {
   const currentVideos: string[] = useSelector(selectCurrentVideos);
   return (
-    <section className={"flex max-w-8xl flex-wrap justify-center gap-6"}>
+    <section
+      className={"container flex max-w-8xl flex-wrap justify-center gap-6"}
+    >
       {currentVideos.length > 0 ? (
         currentVideos.map((id: string) => {
           return (

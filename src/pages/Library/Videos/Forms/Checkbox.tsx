@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { UseFormRegister } from "react-hook-form";
 import titleCase from "../../../../utils/titleCase";
-import { AddToGenreFormData } from "./AddVideoToGenreForm";
+import { AddToGenreFormData } from "./AddVideoToGenreFormModal";
 
 interface Props {
   genre: string;

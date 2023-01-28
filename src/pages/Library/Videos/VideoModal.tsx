@@ -5,7 +5,7 @@ interface Props {
   toggleVideoActive: () => void;
 }
 
-const Video: FunctionComponent<Props> = ({ id, toggleVideoActive }) => {
+const VideoModal: FunctionComponent<Props> = ({ id, toggleVideoActive }) => {
   return (
     <figure
       className={
@@ -25,4 +25,4 @@ const Video: FunctionComponent<Props> = ({ id, toggleVideoActive }) => {
   );
 };
 
-export default Video;
+export default VideoModal;
