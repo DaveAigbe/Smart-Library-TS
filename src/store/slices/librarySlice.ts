@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { Videos } from "../../types/Videos";
-import defaultVideos from "../../data/defaults";
 import { Genres } from "../../types/Genres";
 import { AddToGenreFormData } from "../../pages/Library/Videos/Forms/AddVideoToGenreFormModal";
 
@@ -9,6 +8,7 @@ interface InitialState {
   videos: Videos;
   currentGenre: string;
   genres: Genres;
+  isInitialState: boolean;
 }
 
 interface DeleteVideoPayload {
@@ -23,17 +23,26 @@ interface AddToGenrePayload {
 
 const initialState: InitialState = {
   currentGenre: "all",
-  videos: defaultVideos,
-  genres: ["all", "react", "java", "node"],
+  videos: { all: { ids: [] } },
+  genres: ["all"],
+  isInitialState: true,
 };
 
 export const librarySlice: Slice = createSlice({
   name: "videos",
   initialState,
   reducers: {
+    setInitialVideos: (state, action: PayloadAction<Videos>) => {
+      state.videos = action.payload;
+      state.isInitialState = false;
+      state.genres = Object.keys(action.payload);
+    },
     addVideo: (state, action: PayloadAction<string>) => {
       // Add video to all categories
       state.videos.all.ids = [action.payload, ...state.videos.all.ids];
+
+      // Update Storage
+      localStorage.setItem("videos", JSON.stringify(state.videos));
     },
     deleteVideo: (state, action: PayloadAction<DeleteVideoPayload>) => {
       // If in all genre, filter from all categories
@@ -48,6 +57,9 @@ export const librarySlice: Slice = createSlice({
           state.currentGenre
         ].ids.filter((id: string) => action.payload.id !== id);
       }
+
+      // Update Storage
+      localStorage.setItem("videos", JSON.stringify(state.videos));
     },
     changeGenre: (state, action: PayloadAction<keyof typeof state.videos>) => {
       state.currentGenre = action.payload;
@@ -55,6 +67,9 @@ export const librarySlice: Slice = createSlice({
     addGenre: (state, action: PayloadAction<string>) => {
       state.genres = [...state.genres, action.payload];
       state.videos = { ...state.videos, [action.payload]: { ids: [] } };
+
+      // Update Storage
+      localStorage.setItem("videos", JSON.stringify(state.videos));
     },
     deleteGenre: (state, action: PayloadAction<string>) => {
       if (action.payload !== "all") {
@@ -69,6 +84,9 @@ export const librarySlice: Slice = createSlice({
           state.currentGenre = "all";
         }
       }
+
+      // Update Storage
+      localStorage.setItem("videos", JSON.stringify(state.videos));
     },
     addVideoToGenre: (state, action: PayloadAction<AddToGenrePayload>) => {
       const uniqueGenres: string[] = state.genres.filter(
@@ -91,6 +109,9 @@ export const librarySlice: Slice = createSlice({
           }
         }
       });
+
+      // Update Storage
+      localStorage.setItem("videos", JSON.stringify(state.videos));
     },
   },
 });
@@ -108,7 +129,11 @@ export const selectCurrentGenre = (state: RootState): string => {
 
 export const selectGenres = (state: RootState): Genres => state.library.genres;
 
+export const selectIsInitialState = (state: RootState): boolean =>
+  state.library.isInitialState;
+
 export const {
+  setInitialVideos,
   addVideo,
   deleteVideo,
   changeGenre,
