@@ -65,7 +65,7 @@ const AddGenreFormModal: FunctionComponent<Props> = ({ toggleFormActive }) => {
             New Genre
           </label>
           <section className={"flex justify-between gap-2"}>
-            <p>
+            <div>
               <input
                 id={"genre"}
                 className={
@@ -79,7 +79,7 @@ const AddGenreFormModal: FunctionComponent<Props> = ({ toggleFormActive }) => {
               {isDirty && errors?.genre?.message && (
                 <FormError errorMessage={errors.genre.message} />
               )}
-            </p>
+            </div>
             <SubmitFormButton label={"Create"} />
           </section>
           <CloseFormButton closeForm={toggleFormActive} />

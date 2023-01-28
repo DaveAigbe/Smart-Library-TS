@@ -56,6 +56,20 @@ export const librarySlice: Slice = createSlice({
       state.genres = [...state.genres, action.payload];
       state.videos = { ...state.videos, [action.payload]: { ids: [] } };
     },
+    deleteGenre: (state, action: PayloadAction<string>) => {
+      if (action.payload !== "all") {
+        // Delete genre from Videos
+        delete state.videos[action.payload];
+        // Delete genre from Genres
+        state.genres = state.genres.filter(
+          (genre: string) => action.payload !== genre
+        );
+        // If the current genre matches the one to be deleted, redirect to "all"
+        if (state.currentGenre === action.payload) {
+          state.currentGenre = "all";
+        }
+      }
+    },
     addVideoToGenre: (state, action: PayloadAction<AddToGenrePayload>) => {
       const uniqueGenres: string[] = state.genres.filter(
         (genre: string) => genre !== "all"
@@ -94,6 +108,12 @@ export const selectCurrentGenre = (state: RootState): string => {
 
 export const selectGenres = (state: RootState): Genres => state.library.genres;
 
-export const { addVideo, deleteVideo, changeGenre, addGenre, addVideoToGenre } =
-  librarySlice.actions;
+export const {
+  addVideo,
+  deleteVideo,
+  changeGenre,
+  addGenre,
+  deleteGenre,
+  addVideoToGenre,
+} = librarySlice.actions;
 export default librarySlice.reducer;

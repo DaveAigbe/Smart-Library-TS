@@ -6,7 +6,7 @@ interface Props {
 
 const LoginForm: FunctionComponent<Props> = ({ openRegistration }) => {
   return (
-    <div className="container h-full px-6 py-12">
+    <div className="container h-full px-6 py-12 ">
       <div className="g-6 flex h-full flex-wrap items-center justify-center text-gray-800">
         <section className="mb-12 md:mb-0 md:w-8/12 lg:w-6/12">
           <img
@@ -36,7 +36,7 @@ const LoginForm: FunctionComponent<Props> = ({ openRegistration }) => {
             <p className="mb-6 flex items-center justify-between">
               <a
                 href="#"
-                className="text-main-secondary transition duration-200 ease-in-out hover:text-brown-600"
+                className="font-bold tracking-wider text-red-500 transition duration-200 ease-in-out hover:text-gray-400"
               >
                 Forgot password?
               </a>
@@ -44,7 +44,7 @@ const LoginForm: FunctionComponent<Props> = ({ openRegistration }) => {
 
             <button
               type="submit"
-              className="w-full rounded bg-main-hlt px-7 py-3 text-sm font-medium uppercase text-main-txt shadow-md transition duration-150 ease-in-out hover:bg-main-hlt hover:shadow-lg"
+              className="w-full rounded bg-main-hlt px-7 py-3 text-sm font-medium uppercase text-main-txt shadow-md transition duration-150 ease-in-out hover:bg-main-hlthover hover:shadow-lg"
             >
               Sign in
             </button>
@@ -55,7 +55,7 @@ const LoginForm: FunctionComponent<Props> = ({ openRegistration }) => {
 
             <button
               onClick={openRegistration}
-              className="w-full rounded bg-main-hlt px-7 py-3 text-sm font-medium uppercase text-main-txt shadow-md transition duration-150 ease-in-out hover:bg-main-hlt hover:shadow-lg"
+              className="w-full rounded bg-main-hlt px-7 py-3 text-sm font-medium uppercase text-main-txt shadow-md transition duration-150 ease-in-out hover:bg-main-hlthover hover:shadow-lg"
             >
               Register
             </button>

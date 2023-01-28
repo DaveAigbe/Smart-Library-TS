@@ -42,7 +42,7 @@ const LoginForm: FunctionComponent<Props> = ({ closeRegistration }) => {
 
             <button
               type="submit"
-              className="w-full rounded bg-main-hlt px-7 py-3 text-sm font-medium uppercase text-main-txt shadow-md transition duration-150 ease-in-out hover:bg-main-hlt hover:shadow-lg"
+              className="w-full rounded bg-main-hlt px-7 py-3 text-sm font-medium uppercase text-main-txt shadow-md transition duration-150 ease-in-out hover:bg-main-hlthover hover:shadow-lg"
             >
               Create Account
             </button>
@@ -53,7 +53,7 @@ const LoginForm: FunctionComponent<Props> = ({ closeRegistration }) => {
 
             <button
               onClick={closeRegistration}
-              className="w-full rounded bg-main-hlt px-7 py-3 text-sm font-medium uppercase text-main-txt shadow-md transition duration-150 ease-in-out hover:bg-main-hlt hover:shadow-lg"
+              className="w-full rounded bg-main-hlt px-7 py-3 text-sm font-medium uppercase text-main-txt shadow-md transition duration-150 ease-in-out hover:bg-main-hlthover hover:shadow-lg"
             >
               ← Back to Login
             </button>
