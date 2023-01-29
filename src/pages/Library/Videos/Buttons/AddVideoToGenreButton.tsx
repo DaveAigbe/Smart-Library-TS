@@ -1,18 +1,14 @@
 import React, { FunctionComponent } from "react";
 import { Icon } from "@iconify/react";
-import { useSelector } from "react-redux";
-import { selectCurrentGenre } from "../../../../store/slices/librarySlice";
-import TitleCase from "../../../../utils/titleCase";
 
 interface Props {
   openForm: () => void;
 }
 
 const AddVideoToGenreButton: FunctionComponent<Props> = ({ openForm }) => {
-  const currentGenre: string = useSelector(selectCurrentGenre);
   return (
     <button
-      title={`Add or remove video from ${TitleCase(currentGenre)}`}
+      title={`Click to Add or Remove video from Genres`}
       onClick={openForm}
     >
       <Icon

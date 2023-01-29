@@ -17,6 +17,13 @@ const LoginForm: FunctionComponent<Props> = ({ closeRegistration }) => {
         </section>
         <section className="md:w-8/12 lg:ml-20 lg:w-5/12">
           <form>
+            <h2
+              className={
+                "mb-2 text-4xl font-bold tracking-wider text-main-header"
+              }
+            >
+              Register
+            </h2>
             <p className="mb-6">
               <input
                 type="text"
