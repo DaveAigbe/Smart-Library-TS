@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormError from "../../../components/FormError";
 import { isUniqueValue } from "../../../utils/isUniqueValue";
+import AddVideoTooltip from "../AddVideoTooltip";
 
 interface Props {}
 
@@ -51,15 +52,22 @@ const AddVideoForm: FunctionComponent<Props> = () => {
 
   return (
     <form
-      className={"flex flex-col items-center justify-center gap-4 text-black"}
+      className={
+        "relative flex flex-col items-center justify-center gap-4 text-black"
+      }
       onSubmit={handleSubmit(handleSubmitVideo)}
     >
-      <input
-        type="text"
-        className={"h-14 w-full rounded bg-white p-4 md:w-96 "}
-        placeholder={"ID"}
-        {...register("videoID")}
-      />
+      <section className={"w-full"}>
+        <input
+          type="text"
+          className={"h-14 w-full rounded bg-white p-4 md:w-96 "}
+          placeholder={"ID"}
+          {...register("videoID")}
+        />
+        <div className={"absolute top-0.5 right-0.5"}>
+          <AddVideoTooltip />
+        </div>
+      </section>
       {isDirty && errors?.videoID?.message && (
         <FormError errorMessage={errors.videoID.message} />
       )}

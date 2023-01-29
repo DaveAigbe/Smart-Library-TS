@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import useIsLibraryPage from "../hooks/useIsLibraryPage";
-import GenresTooltip from "../pages/Library/Genres/GenresTooltip";
+import AddGenreTooltip from "../pages/Library/Genres/AddGenreTooltip";
 import AddGenreButton from "../pages/Library/Genres/Buttons/AddGenreButton";
 import Profile from "../pages/Library/Profile/Profile";
 import GenresContainer from "../pages/Library/Genres/GenresContainer";
@@ -36,9 +36,9 @@ const Header: FunctionComponent<Props> = () => {
                 <section className={"flex items-center"}>
                   <NavLogo />
                   <nav className={"flex gap-1"}>
-                    <GenresTooltip>
+                    <AddGenreTooltip>
                       <AddGenreButton openForm={toggleFormActive} />
-                    </GenresTooltip>
+                    </AddGenreTooltip>
                     <GenresContainer />
                   </nav>
                   {formActive && (
