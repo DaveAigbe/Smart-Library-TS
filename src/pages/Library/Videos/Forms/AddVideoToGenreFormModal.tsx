@@ -6,12 +6,12 @@ import CloseFormButton from "../../../../components/CloseFormButton";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addVideoToGenre,
-  selectAllVideos,
   selectGenres,
+  selectLibrary,
 } from "../../../../store/slices/librarySlice";
 import Checkbox from "./Checkbox";
 import { Genres } from "../../../../types/Genres";
-import { Videos } from "../../../../types/Videos";
+import { Library } from "../../../../types/Library";
 
 interface Props {
   toggleFormActive: () => void;
@@ -27,7 +27,7 @@ const AddVideoToGenreFormModal: FunctionComponent<Props> = ({
   id,
 }) => {
   const { register, handleSubmit, reset } = useForm<AddToGenreFormData>();
-  const allVideos: Videos = useSelector(selectAllVideos);
+  const allVideos: Library = useSelector(selectLibrary);
   const genres: Genres = useSelector(selectGenres);
   const dispatch = useDispatch();
 
@@ -35,6 +35,7 @@ const AddVideoToGenreFormModal: FunctionComponent<Props> = ({
 
   const getDefaultChecks = (): AddToGenreFormData => {
     const defaultChecks: AddToGenreFormData = {};
+    // Go through each genre and check if the video is stored there, this will return the checks that should already be applied
     uniqueGenres.forEach((genre: string) => {
       defaultChecks[genre] = allVideos[genre].ids.includes(id);
     });
@@ -48,6 +49,7 @@ const AddVideoToGenreFormModal: FunctionComponent<Props> = ({
   };
 
   useEffect(() => {
+    // Whenever the default checks load, reset the defaults based off of the object returned
     const defaultChecks = getDefaultChecks();
     reset({ ...defaultChecks });
   }, []);

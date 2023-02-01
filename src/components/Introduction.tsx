@@ -5,10 +5,15 @@ import BigButton from "./BigButton";
 import { Link } from "react-router-dom";
 import AddVideoForm from "../pages/Library/Forms/AddVideoForm";
 import useIsLibraryPage from "../hooks/useIsLibraryPage";
+import useIsHomePage from "../hooks/useIsHomePage";
+import { useSelector } from "react-redux";
+import { selectIsAuthenticated } from "../store/slices/userSlice";
 
 interface Props {}
 
 const Introduction: FunctionComponent<Props> = () => {
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+
   return (
     <section
       className={
@@ -31,9 +36,13 @@ const Introduction: FunctionComponent<Props> = () => {
         <Description />
         {useIsLibraryPage() && <AddVideoForm />}
       </div>
-      {!useIsLibraryPage() && (
-        <Link to={"library"} className={"mt-10"}>
-          <BigButton content={"Continue to Library ➔"} />
+      {useIsHomePage() && (
+        <Link to={"/login"} className={"mt-10"}>
+          <BigButton
+            content={
+              isAuthenticated ? "Back To Library ➔" : "Continue to Login ➔"
+            }
+          />
         </Link>
       )}
     </section>

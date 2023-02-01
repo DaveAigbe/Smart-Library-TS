@@ -1,6 +1,6 @@
 import defaultVideos from "../data/defaults";
-import { setInitialVideos } from "../store/slices/librarySlice";
-import { Videos } from "../types/Videos";
+import { setInitialLibrary } from "../store/slices/librarySlice";
+import { Library } from "../types/Library";
 import { Dispatch } from "@reduxjs/toolkit";
 
 /*
@@ -9,19 +9,19 @@ import { Dispatch } from "@reduxjs/toolkit";
  * */
 
 const handleVideosLocalStorage = (
-  allVideos: Videos,
+  allVideos: Library,
   dispatch: Dispatch,
   isInitial: boolean
 ) => {
-  const storageItems = localStorage.getItem("videos");
+  const storageItems = localStorage.getItem("library");
 
   if (storageItems && isInitial) {
     // 1.
-    dispatch(setInitialVideos(JSON.parse(storageItems)));
+    dispatch(setInitialLibrary(JSON.parse(storageItems)));
   } else {
     // 2.
-    dispatch(setInitialVideos(defaultVideos));
-    localStorage.setItem("videos", JSON.stringify(defaultVideos));
+    dispatch(setInitialLibrary(defaultVideos));
+    localStorage.setItem("library", JSON.stringify(defaultVideos));
   }
 };
 

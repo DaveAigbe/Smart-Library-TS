@@ -11,21 +11,30 @@ import TitleCase from "../../../../utils/titleCase";
 
 interface Props {
   id: string;
+  deleteVideoNotification: () => void;
 }
 
-const DeleteVideoButton: FunctionComponent<Props> = ({ id }) => {
+const DeleteVideoButton: FunctionComponent<Props> = ({
+  id,
+  deleteVideoNotification,
+}) => {
   const genres: Genres = useSelector(selectGenres);
   const dispatch = useDispatch();
   const currentGenre: string = useSelector(selectCurrentGenre);
+
+  const handleDeleteVideo = () => {
+    dispatch(deleteVideo({ id: id, genres }));
+    deleteVideoNotification();
+  };
 
   return (
     <button
       title={`Click to Remove video from ${
         currentGenre === "all"
-          ? "Entire Library"
+          ? "Entire LibraryPage"
           : `${TitleCase(currentGenre)} Genre`
       }`}
-      onClick={() => dispatch(deleteVideo({ id: id, genres }))}
+      onClick={handleDeleteVideo}
     >
       <Icon
         className={

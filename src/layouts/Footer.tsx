@@ -16,6 +16,8 @@ const Footer: FunctionComponent<Props> = () => {
           href="https://github.com/DaveAigbe"
           rel={"noreferrer"}
           target={"_blank"}
+          tabIndex={0}
+          aria-label={"Link to Github"}
         >
           <Icon
             icon="mdi:github"
@@ -26,6 +28,8 @@ const Footer: FunctionComponent<Props> = () => {
           href="https://www.linkedin.com/in/daveaigbejr"
           rel={"noreferrer"}
           target={"_blank"}
+          tabIndex={1}
+          aria-label={"Link to LinkedIn"}
         >
           <Icon
             icon="mdi:linkedin"
@@ -36,13 +40,19 @@ const Footer: FunctionComponent<Props> = () => {
           href="https://www.daveaigbe.live"
           rel={"noreferrer"}
           target={"_blank"}
+          tabIndex={2}
+          aria-label={"Link to Portfolio Website"}
         >
           <Icon
             icon="dashicons:admin-site-alt3"
             className={"cursor-pointer hover:animate-spin"}
           />
         </a>
-        <a href="mailto:davesprogrammingcs@gmail.com">
+        <a
+          href="mailto:davesprogrammingcs@gmail.com"
+          aria-label={"Link to Email"}
+          tabIndex={3}
+        >
           <Icon
             icon="mdi:email"
             className={"cursor-pointer hover:animate-spin"}

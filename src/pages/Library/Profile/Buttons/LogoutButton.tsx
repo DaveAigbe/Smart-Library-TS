@@ -1,19 +1,24 @@
 import React, { FunctionComponent } from "react";
 import NavButton from "../../../../components/NavButton";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../../../../store/slices/userSlice";
 
-interface Props {
-  logout: () => void;
-}
+interface Props {}
 
-const LoginButton: FunctionComponent<Props> = ({ logout }) => {
+const LoginButton: FunctionComponent<Props> = () => {
+  const dispatch = useDispatch();
+
   return (
-    <NavButton
-      label={"logout"}
-      handleClick={logout}
-      backgroundColor={"red-400"}
-      hoverBackgroundColor={"red-500"}
-      labelColor={"main-pg"}
-    />
+    <Link to={"/login"}>
+      <NavButton
+        label={"logout"}
+        backgroundColor={"#d90000"}
+        hoverBackgroundColor={"black"}
+        labelColor={"main-pg"}
+        handleClick={() => dispatch(logout({}))}
+      />
+    </Link>
   );
 };
 

@@ -1,3 +1,1 @@
-type ActiveToggle = [isActive: boolean, toggleActive: () => void];
-
-export type { ActiveToggle };
+export type ActiveToggle = [isActive: boolean, toggleActive: () => void];

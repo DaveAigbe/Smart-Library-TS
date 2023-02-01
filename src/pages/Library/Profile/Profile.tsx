@@ -2,18 +2,20 @@ import React, { FunctionComponent } from "react";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
 import LogoutButton from "./Buttons/LogoutButton";
+import { useSelector } from "react-redux";
+import { selectUsername } from "../../../store/slices/userSlice";
 
-interface Props {
-  username: string;
-  logout: () => void;
-}
+interface Props {}
 
-const Profile: FunctionComponent<Props> = ({ username, logout }) => {
+const Profile: FunctionComponent<Props> = () => {
+  const username = useSelector(selectUsername);
+
   return (
     <section className={"flex items-center justify-center gap-2"}>
       <p className={"text-lg text-main-header"}>Hello, {username}</p>
-      <Link to={"/account"}>
+      <Link to={"/library/account"}>
         <button
+          title={"Account"}
           className={"flex items-center justify-center text-white md:right-5"}
         >
           <Icon
@@ -24,7 +26,7 @@ const Profile: FunctionComponent<Props> = ({ username, logout }) => {
           />
         </button>
       </Link>
-      <LogoutButton logout={logout} />
+      <LogoutButton />
     </section>
   );
 };

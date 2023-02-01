@@ -1,10 +1,58 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect } from "react";
+import FormButton from "../Buttons/FormButton";
+import ButtonDivider from "../ButtonDivider";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import FormError from "../../../components/FormError";
+import { useDispatch } from "react-redux";
+import { registration } from "../../../store/slices/userSlice";
 
 interface Props {
   closeRegistration: () => void;
 }
 
-const LoginForm: FunctionComponent<Props> = ({ closeRegistration }) => {
+interface FormData {
+  email: string;
+  username: string;
+  password: string;
+  confirmPassword: string;
+}
+
+const registerSchema = yup.object().shape({
+  email: yup.string().email("⚠ Please enter a valid email address.").required(), // Test that checks if email exists
+  username: yup.string().required(), // Check that test if username exists
+  password: yup
+    .string()
+    .min(8, "⚠ Password must be at least 8 characters")
+    .required(),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password")], "⚠ Passwords do not match"), // Validate that passwords match
+});
+
+const RegisterForm: FunctionComponent<Props> = ({ closeRegistration }) => {
+  const {
+    setFocus,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({ resolver: yupResolver(registerSchema) });
+  const dispatch = useDispatch();
+
+  const handleSubmitRegistration = (data: FormData) => {
+    const registrationInfo = {
+      email: data.email,
+      username: data.username,
+      password: data.password,
+    };
+    dispatch(registration(registrationInfo));
+  };
+
+  useEffect(() => {
+    setFocus("email");
+  }, []);
+
   return (
     <div className="container h-full px-6 py-12">
       <div className="g-6 flex h-full flex-wrap items-center justify-center text-gray-800">
@@ -16,54 +64,72 @@ const LoginForm: FunctionComponent<Props> = ({ closeRegistration }) => {
           />
         </section>
         <section className="md:w-8/12 lg:ml-20 lg:w-5/12">
-          <form>
-            <h2
-              className={
-                "mb-2 text-4xl font-bold tracking-wider text-main-header"
-              }
-            >
-              Register
-            </h2>
-            <p className="mb-6">
+          <h2
+            className={
+              "mb-2 text-4xl font-bold tracking-wider text-main-header"
+            }
+          >
+            Register
+          </h2>
+          <form
+            className={"flex flex-col gap-6"}
+            onSubmit={handleSubmit(handleSubmitRegistration)}
+          >
+            <section>
               <input
                 type="text"
                 className="m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-4 py-2 text-xl font-normal text-gray-700 transition ease-in-out focus:border-main-hlt focus:bg-white focus:text-gray-700 focus:outline-none"
                 placeholder="Email address"
+                {...register("email")}
               />
-            </p>
+              {errors?.email?.message && (
+                <FormError errorMessage={errors.email.message} />
+              )}
+            </section>
 
-            <p className="mb-6">
+            <section>
+              <input
+                type="text"
+                className="m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-4 py-2 text-xl font-normal text-gray-700 transition ease-in-out focus:border-main-hlt focus:bg-white focus:text-gray-700 focus:outline-none"
+                placeholder="Display name"
+                {...register("username")}
+              />
+              {errors?.username?.message && (
+                <FormError errorMessage={errors.username.message} />
+              )}
+            </section>
+
+            <section>
               <input
                 type="password"
                 className="m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-4 py-2 text-xl font-normal text-gray-700 transition ease-in-out focus:border-main-hlt focus:bg-white focus:text-gray-700 focus:outline-none"
                 placeholder="Password"
+                {...register("password")}
               />
-            </p>
-            <p className="mb-6">
+              {errors?.password?.message && (
+                <FormError errorMessage={errors.password.message} />
+              )}
+            </section>
+            <section>
               <input
                 type="password"
                 className="m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-4 py-2 text-xl font-normal text-gray-700 transition ease-in-out focus:border-main-hlt focus:bg-white focus:text-gray-700 focus:outline-none"
-                placeholder="Re-enter Password"
+                placeholder="Confirm Password"
+                {...register("confirmPassword")}
               />
-            </p>
+              {errors?.confirmPassword?.message && (
+                <FormError errorMessage={errors.confirmPassword.message} />
+              )}
+            </section>
 
-            <button
-              type="submit"
-              className="w-full rounded bg-main-hlt px-7 py-3 text-sm font-medium uppercase text-main-txt shadow-md transition duration-150 ease-in-out hover:bg-main-hlthover hover:shadow-lg"
-            >
-              Create Account
-            </button>
-
-            <div className="my-4 flex items-center text-main-pg before:mt-0.5 before:flex-1 before:border-t before:border-gray-300 after:mt-0.5 after:flex-1 after:border-t after:border-gray-300">
-              <p className="mx-4 mb-0 text-center font-semibold">OR</p>
+            <div>
+              <FormButton label={"Create Account"} isSubmit={true} />
+              <ButtonDivider />
+              <FormButton
+                label={"← Back to Login"}
+                clickHandler={closeRegistration}
+              />
             </div>
-
-            <button
-              onClick={closeRegistration}
-              className="w-full rounded bg-main-hlt px-7 py-3 text-sm font-medium uppercase text-main-txt shadow-md transition duration-150 ease-in-out hover:bg-main-hlthover hover:shadow-lg"
-            >
-              ← Back to Login
-            </button>
           </form>
         </section>
       </div>
@@ -71,4 +137,4 @@ const LoginForm: FunctionComponent<Props> = ({ closeRegistration }) => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "description": "The frontend portion of the fullstack application Smart Library",
   "author": {
     "name": "Dave jr.",
     "email": "davesprogrammingcs@gmail.com",

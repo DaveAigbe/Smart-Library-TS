@@ -7,9 +7,13 @@ import AddVideoToGenreFormModal from "./Forms/AddVideoToGenreFormModal";
 
 interface Props {
   id: string;
+  deleteVideoNotification: () => void;
 }
 
-const VideoThumbnail: FunctionComponent<Props> = ({ id }) => {
+const VideoThumbnail: FunctionComponent<Props> = ({
+  id,
+  deleteVideoNotification,
+}) => {
   const [videoActive, toggleVideoActive] = useToggleActive();
   const [formActive, toggleFormActive] = useToggleActive();
 
@@ -24,13 +28,16 @@ const VideoThumbnail: FunctionComponent<Props> = ({ id }) => {
       <img
         onClick={toggleVideoActive}
         className={
-          "cursor-pointer rounded-2xl md:h-186 md:w-330 c-md:h-214 c-md:w-380 lg:h-259 lg:w-460 c-xl:h-315 c-xl:w-560"
+          "aspect-ratio cursor-pointer rounded-2xl md:h-186  c-md:h-214  lg:h-259  c-xl:h-315 "
         }
         src={`https://i.ytimg.com/vi/${id}/maxresdefault.jpg`}
         alt="Youtube video thumbnail"
       />
       <section>
-        <DeleteVideoButton id={id} />
+        <DeleteVideoButton
+          id={id}
+          deleteVideoNotification={deleteVideoNotification}
+        />
         <AddVideoToGenreButton openForm={toggleFormActive} />
       </section>
       {videoActive && (

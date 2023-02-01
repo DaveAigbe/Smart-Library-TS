@@ -70,6 +70,19 @@ module.exports = {
           hlthover: '#d57ba7'
         }
       },
+      animation: {
+        'fade-in-out': 'fadeIn 0.5s, fadeOut 0.5s 3.5s'
+      },
+      keyframes: {
+        'fadeIn': {
+          'from': {bottom: 0, opacity: 0},
+          'to': {bottom: '50px', opacity: 1}
+        },
+        'fadeOut': {
+          'from': {bottom: '50px', opacity: 1},
+          'to': {bottom: 0, opacity: 0}
+        }
+      }
     },
   },
   plugins: [],

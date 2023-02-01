@@ -4,7 +4,7 @@ import VideosContainer from "./Videos/VideosContainer";
 
 interface Props {}
 
-const Library: FunctionComponent<Props> = () => {
+const LibraryPage: FunctionComponent<Props> = () => {
   return (
     <section className={"flex flex-col items-center justify-center"}>
       <Introduction />
@@ -13,4 +13,4 @@ const Library: FunctionComponent<Props> = () => {
   );
 };
 
-export default Library;
+export default LibraryPage;

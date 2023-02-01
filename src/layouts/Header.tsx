@@ -6,23 +6,20 @@ import Profile from "../pages/Library/Profile/Profile";
 import GenresContainer from "../pages/Library/Genres/GenresContainer";
 import AddGenreFormModal from "../pages/Library/Genres/Forms/AddGenreFormModal";
 import { useToggleActive } from "../hooks/useToggleActive";
-import LoginButton from "../pages/Library/Profile/Buttons/LoginButton";
 import NavLogo from "../components/NavLogo";
 import useIsHomePage from "../hooks/useIsHomePage";
 import NavButton from "../components/NavButton";
 import { Link } from "react-router-dom";
+import useIsAccountPage from "../hooks/useIsAccountPage";
+import { Icon } from "@iconify/react";
 
 interface Props {}
 
 const Header: FunctionComponent<Props> = () => {
   const [formActive, toggleFormActive] = useToggleActive();
-  const [loggedIn, toggleLoggedIn] = useToggleActive();
   const isHomePage = useIsHomePage();
   const isLibraryPage = useIsLibraryPage();
-
-  const loginClicked = () => {
-    console.log("Clicked");
-  };
+  const isAccountPage = useIsAccountPage();
 
   return (
     <>
@@ -30,43 +27,60 @@ const Header: FunctionComponent<Props> = () => {
         <div></div>
       ) : (
         <>
-          {isLibraryPage ? (
-            <header className={"fixed inset-x-0 top-0 z-20 bg-brown-400 p-1.5"}>
-              <section className={"flex items-center justify-between"}>
-                <section className={"flex items-center"}>
-                  <NavLogo />
-                  <nav className={"flex gap-1"}>
-                    <AddGenreTooltip>
-                      <AddGenreButton openForm={toggleFormActive} />
-                    </AddGenreTooltip>
-                    <GenresContainer />
-                  </nav>
-                  {formActive && (
-                    <AddGenreFormModal toggleFormActive={toggleFormActive} />
+          <header
+            className={`${
+              isLibraryPage ? "fixed inset-x-0 top-0 z-20" : "w-full"
+            } bg-brown-400 p-1.5`}
+          >
+            <section className={"flex items-center justify-between"}>
+              {isLibraryPage ? (
+                <>
+                  <section className={"flex items-center"}>
+                    <NavLogo />
+                    <nav className={"flex gap-1"}>
+                      <AddGenreTooltip>
+                        <AddGenreButton openForm={toggleFormActive} />
+                      </AddGenreTooltip>
+                      <GenresContainer />
+                    </nav>
+                    {formActive && (
+                      <AddGenreFormModal toggleFormActive={toggleFormActive} />
+                    )}
+                  </section>
+                  <Profile />
+                </>
+              ) : (
+                <>
+                  {isAccountPage ? (
+                    <>
+                      <NavLogo />
+                      <Link to={"/library"}>
+                        <NavButton
+                          label={"← Back To Library"}
+                          backgroundColor={"#e78fb3"}
+                          hoverBackgroundColor={"main-hlthover"}
+                          labelColor={"main-txt"}
+                        />
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <NavLogo />
+                      <Link to={"/"}>
+                        <NavButton
+                          backgroundColor={"#e78fb3"}
+                          hoverBackgroundColor={"main-hlthover"}
+                          labelColor={"main-txt"}
+                        >
+                          <Icon icon="mdi:house" className={"text-base"} />
+                        </NavButton>
+                      </Link>
+                    </>
                   )}
-                </section>
-                {loggedIn ? (
-                  <Profile username={"Dave"} logout={toggleLoggedIn} />
-                ) : (
-                  <LoginButton login={loginClicked} />
-                )}
-              </section>
-            </header>
-          ) : (
-            <header className={"w-full bg-brown-400 p-1.5"}>
-              <section className={"flex items-center justify-between"}>
-                <NavLogo />
-                <Link to={"/library"}>
-                  <NavButton
-                    label={"← To Library"}
-                    backgroundColor={"main-hlt"}
-                    hoverBackgroundColor={"main-hlthover"}
-                    labelColor={"main-txt"}
-                  />
-                </Link>
-              </section>
-            </header>
-          )}
+                </>
+              )}
+            </section>
+          </header>
         </>
       )}
     </>

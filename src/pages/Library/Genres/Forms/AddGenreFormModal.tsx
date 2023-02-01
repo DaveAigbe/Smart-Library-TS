@@ -23,7 +23,7 @@ const AddGenreFormModal: FunctionComponent<Props> = ({ toggleFormActive }) => {
   const genres: Genres = useSelector(selectGenres);
   const dispatch = useDispatch();
 
-  const schema = yup.object().shape({
+  const genreSchema = yup.object().shape({
     genre: yup
       .string()
       .min(1, "⚠ Genre must have a name.")
@@ -40,7 +40,7 @@ const AddGenreFormModal: FunctionComponent<Props> = ({ toggleFormActive }) => {
     setFocus,
     formState: { errors, isDirty },
   } = useForm<FormData>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(genreSchema),
   });
 
   const handleSubmitGenre = (data: FormData) => {

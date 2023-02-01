@@ -1,4 +1,2 @@
-type Genres = string[];
+export type Genres = string[];
 // PropertyKey type
-
-export type { Genres };

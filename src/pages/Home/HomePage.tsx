@@ -3,7 +3,7 @@ import Introduction from "../../components/Introduction";
 
 interface Props {}
 
-const Home: FunctionComponent<Props> = () => {
+const HomePage: FunctionComponent<Props> = () => {
   return (
     <section className={"relative flex flex-col items-center justify-center"}>
       <Introduction />
@@ -16,4 +16,4 @@ const Home: FunctionComponent<Props> = () => {
   );
 };
 
-export default Home;
+export default HomePage;

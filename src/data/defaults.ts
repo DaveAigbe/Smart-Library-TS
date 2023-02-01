@@ -1,6 +1,6 @@
-import { Videos } from "../types/Videos";
+import { Library } from "../types/Library";
 
-const defaultVideos: Videos = {
+const defaultVideos: Library = {
   all: {
     ids: [
       "DmxzHJ3lq6U",
