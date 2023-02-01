@@ -14,7 +14,9 @@ const VideoModal: FunctionComponent<Props> = ({ id, toggleVideoActive }) => {
       onClick={toggleVideoActive}
     >
       <iframe
-        className={"aspect-video w-full rounded-2xl lg:w-3/4"}
+        className={
+          "aspect-video w-full rounded-2xl border-8 border-main-hlt shadow-2xl lg:w-3/4"
+        }
         src={`https://www.youtube.com/embed/${id}`}
         title="YouTube video player"
         allowFullScreen={true}
