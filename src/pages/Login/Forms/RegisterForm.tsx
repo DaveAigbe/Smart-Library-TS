@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { registration } from "../../../store/slices/userSlice";
 
 interface Props {
-  closeRegistration: () => void;
+  closeRegistration: (state?: boolean) => void;
 }
 
 interface FormData {

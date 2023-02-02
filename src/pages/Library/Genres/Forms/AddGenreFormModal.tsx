@@ -12,7 +12,7 @@ import { isUniqueValue } from "../../../../utils/isUniqueValue";
 import { Genres } from "../../../../types/Genres";
 
 interface Props {
-  toggleFormActive: () => void;
+  toggleFormActive: (state?: boolean) => void;
 }
 
 interface FormData {

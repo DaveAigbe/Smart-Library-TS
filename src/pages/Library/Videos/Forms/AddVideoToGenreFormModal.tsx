@@ -14,7 +14,7 @@ import { Genres } from "../../../../types/Genres";
 import { Library } from "../../../../types/Library";
 
 interface Props {
-  toggleFormActive: () => void;
+  toggleFormActive: (state?: boolean) => void;
   id: string;
 }
 

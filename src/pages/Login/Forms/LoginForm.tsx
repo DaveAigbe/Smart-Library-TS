@@ -9,7 +9,7 @@ import { login } from "../../../store/slices/userSlice";
 import FormError from "../../../components/FormError";
 
 interface Props {
-  openRegistration: () => void;
+  openRegistration: (state?: boolean) => void;
 }
 
 interface FormData {

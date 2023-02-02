@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import { Icon } from "@iconify/react";
 
 interface Props {
-  closeNav: () => void;
+  closeNav: (state?: boolean) => void;
 }
 
 const CloseNavButton: FunctionComponent<Props> = ({ closeNav }) => {
@@ -10,7 +10,7 @@ const CloseNavButton: FunctionComponent<Props> = ({ closeNav }) => {
     <button
       type={"button"}
       className={"text-4xl text-red-600 lg:hidden"}
-      onClick={closeNav}
+      onClick={() => closeNav()}
     >
       <Icon icon="ant-design:close-square-twotone" />
     </button>

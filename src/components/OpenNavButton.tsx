@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import { Icon } from "@iconify/react";
 
 interface Props {
-  openNav: () => void;
+  openNav: (state?: boolean) => void;
 }
 
 const OpenNavButton: FunctionComponent<Props> = ({ openNav }) => {
@@ -10,7 +10,7 @@ const OpenNavButton: FunctionComponent<Props> = ({ openNav }) => {
     <button
       type={"button"}
       className={"text-3xl text-main-txt lg:hidden"}
-      onClick={openNav}
+      onClick={() => openNav()}
     >
       <Icon icon="icon-park-outline:hamburger-button" />
     </button>

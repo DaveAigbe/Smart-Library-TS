@@ -44,7 +44,7 @@ const Header: FunctionComponent<Props> = () => {
                 className={`fixed inset-x-0 ${
                   !navActive && "hidden"
                 } inset-y-0 z-10 bg-gray-600/50 lg:hidden`}
-                onClick={toggleNavActive}
+                onClick={() => toggleNavActive()}
               ></div>
               <nav
                 className={`fixed right-0 top-0 z-20 h-full py-3 ${

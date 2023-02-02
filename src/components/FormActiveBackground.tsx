@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactNode } from "react";
 
 interface Props {
   children?: ReactNode;
-  closeElement: () => void;
+  closeElement: (state?: boolean) => void;
 }
 
 const FormActiveBackground: FunctionComponent<Props> = ({
@@ -15,7 +15,7 @@ const FormActiveBackground: FunctionComponent<Props> = ({
         <div
           className={"fixed inset-x-0 inset-y-0 z-30 bg-gray-600/50"}
           id={"background"}
-          onClick={closeElement}
+          onClick={() => closeElement()}
         ></div>
         <div
           className={

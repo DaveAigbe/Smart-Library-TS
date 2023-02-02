@@ -2,14 +2,15 @@ import React, { FunctionComponent } from "react";
 import { Icon } from "@iconify/react";
 
 interface Props {
-  openForm: () => void;
+  openForm: (state?: boolean) => void;
 }
 
 const AddVideoToGenreButton: FunctionComponent<Props> = ({ openForm }) => {
   return (
     <button
+      type="button"
       title={`Click to Add or Remove video from Genres`}
-      onClick={openForm}
+      onClick={() => openForm()}
     >
       <Icon
         className={

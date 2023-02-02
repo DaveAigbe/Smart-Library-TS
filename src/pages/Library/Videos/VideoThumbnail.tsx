@@ -26,7 +26,7 @@ const VideoThumbnail: FunctionComponent<Props> = ({
       }`}
     >
       <img
-        onClick={toggleVideoActive}
+        onClick={() => toggleVideoActive()}
         className={
           "aspect-ratio cursor-pointer rounded-2xl md:h-186  c-md:h-214  lg:h-259  c-xl:h-315 "
         }

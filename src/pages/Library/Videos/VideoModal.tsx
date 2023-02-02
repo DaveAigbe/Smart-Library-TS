@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 
 interface Props {
   id: string;
-  toggleVideoActive: () => void;
+  toggleVideoActive: (state?: boolean) => void;
 }
 
 const VideoModal: FunctionComponent<Props> = ({ id, toggleVideoActive }) => {
@@ -11,7 +11,7 @@ const VideoModal: FunctionComponent<Props> = ({ id, toggleVideoActive }) => {
       className={
         "fixed inset-y-0 inset-x-0 z-20 flex items-center justify-center bg-gray-600/25 p-5 backdrop-blur-md"
       }
-      onClick={toggleVideoActive}
+      onClick={() => toggleVideoActive()}
     >
       <iframe
         className={
