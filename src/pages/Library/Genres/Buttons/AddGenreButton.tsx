@@ -10,7 +10,7 @@ const AddGenreButton: FunctionComponent<Props> = ({ openForm }) => {
     <div onClick={openForm}>
       <Icon
         className={
-          "cursor-pointer self-center text-4xl text-white transition-all duration-150 ease-in-out hover:text-main-hlt "
+          "cursor-pointer text-4xl text-green-600 transition-all duration-150 ease-in-out hover:text-main-hlt lg:text-main-header"
         }
         icon="ant-design:plus-square-twotone"
       />

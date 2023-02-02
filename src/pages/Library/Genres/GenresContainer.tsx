@@ -10,7 +10,9 @@ const GenresContainer: FunctionComponent<Props> = () => {
   const genres: Genres = useSelector(selectGenres);
 
   return (
-    <section className={"wrap container flex gap-1"}>
+    <section
+      className={"wrap container flex flex-col items-center gap-1 lg:flex-row"}
+    >
       {genres.map((genre: string) => {
         return (
           <Fragment key={genre}>

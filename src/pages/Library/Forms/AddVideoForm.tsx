@@ -65,7 +65,7 @@ const AddVideoForm: FunctionComponent<Props> = () => {
         }
         onSubmit={handleSubmit(handleSubmitVideo)}
       >
-        <section className={"w-full"}>
+        <section className={"w-full md:w-fit"}>
           <input
             type="text"
             className={"h-14 w-full rounded bg-white p-4 md:w-96 "}

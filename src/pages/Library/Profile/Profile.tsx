@@ -26,7 +26,9 @@ const Profile: FunctionComponent<Props> = () => {
           />
         </button>
       </Link>
-      <LogoutButton />
+      <div className={"hidden lg:inline-flex"}>
+        <LogoutButton />
+      </div>
     </section>
   );
 };

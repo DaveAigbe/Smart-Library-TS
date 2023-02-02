@@ -17,12 +17,12 @@ const Introduction: FunctionComponent<Props> = () => {
   return (
     <section
       className={
-        "relative z-10 my-14 flex flex-col items-center justify-center md:my-36 md:max-w-6xl lg:text-left"
+        "relative z-10 my-14 flex flex-col items-center justify-center lg:my-36 lg:max-w-6xl lg:text-left"
       }
     >
       <div
         className={
-          "mb-10 flex justify-center gap-4 text-4xl font-bold tracking-wide text-main-header sm:text-5xl md:text-8xl "
+          "mb-10 flex justify-center gap-4 text-4xl font-bold tracking-wide text-main-header md:text-5xl lg:text-8xl "
         }
       >
         <h1>Smart Library</h1>
@@ -30,7 +30,7 @@ const Introduction: FunctionComponent<Props> = () => {
       </div>
       <div
         className={
-          "flex flex-col gap-4 leading-loose text-main-pg sm:text-lg md:flex-row md:text-xl "
+          "flex flex-col gap-4 leading-loose text-main-pg md:text-lg lg:flex-row lg:text-xl "
         }
       >
         <Description />
