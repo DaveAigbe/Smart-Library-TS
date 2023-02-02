@@ -1,12 +1,20 @@
-import React, { FunctionComponent } from "react";
+import React, { FormEvent, FunctionComponent } from "react";
 
 interface Props {}
+
+const handleSubmitForm = (e: FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  console.log("Not implemented yet!");
+};
 
 const EditUserForm: FunctionComponent<Props> = () => {
   return (
     <section className={"text-main-txt"}>
       <h2 className={"mb-4 text-center text-xl font-bold"}>Edit Data</h2>
-      <form className={"flex flex-col gap-2 text-left"}>
+      <form
+        className={"flex flex-col gap-2 text-left"}
+        onSubmit={handleSubmitForm}
+      >
         <div className={"flex justify-between gap-2"}>
           <label htmlFor="email">Email: </label>
           <input name={"email"} className={" w-92 rounded p-1"} type="email" />
