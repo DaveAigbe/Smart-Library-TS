@@ -2,17 +2,20 @@ import React, { FunctionComponent, ReactNode } from "react";
 
 interface Props {
   children?: ReactNode;
-  closeForm: () => void;
+  closeElement: () => void;
 }
 
-const FormBackground: FunctionComponent<Props> = ({ children, closeForm }) => {
+const FormActiveBackground: FunctionComponent<Props> = ({
+  children,
+  closeElement,
+}) => {
   return (
     <div>
       <div className={"fixed inset-x-0 inset-y-0 z-20 "}>
         <div
           className={"fixed inset-x-0 inset-y-0 z-30 bg-gray-600/50"}
           id={"background"}
-          onClick={closeForm}
+          onClick={closeElement}
         ></div>
         <div
           className={
@@ -27,4 +30,4 @@ const FormBackground: FunctionComponent<Props> = ({ children, closeForm }) => {
   );
 };
 
-export default FormBackground;
+export default FormActiveBackground;

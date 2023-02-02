@@ -1,5 +1,5 @@
 import React, { Fragment, FunctionComponent, useEffect } from "react";
-import FormBackground from "../../../../components/FormBackground";
+import FormActiveBackground from "../../../../components/FormActiveBackground";
 import { useForm } from "react-hook-form";
 import SubmitFormButton from "../../../../components/SubmitFormButton";
 import CloseFormButton from "../../../../components/CloseFormButton";
@@ -55,7 +55,7 @@ const AddVideoToGenreFormModal: FunctionComponent<Props> = ({
   }, []);
 
   return (
-    <FormBackground closeForm={toggleFormActive}>
+    <FormActiveBackground closeElement={toggleFormActive}>
       <form
         className={
           "relative z-20 rounded bg-brown-400  py-2.5 pl-2.5 pr-16 text-lg text-main-txt"
@@ -77,7 +77,7 @@ const AddVideoToGenreFormModal: FunctionComponent<Props> = ({
         <SubmitFormButton label={"Submit"} />
         <CloseFormButton closeForm={toggleFormActive} />
       </form>
-    </FormBackground>
+    </FormActiveBackground>
   );
 };
 

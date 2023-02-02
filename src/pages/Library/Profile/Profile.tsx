@@ -12,7 +12,9 @@ const Profile: FunctionComponent<Props> = () => {
 
   return (
     <section className={"flex items-center justify-center gap-2"}>
-      <p className={"text-lg text-main-header"}>Hello, {username}</p>
+      <p className={"text-lg text-main-header md:inline-flex md:text-xl"}>
+        {username}
+      </p>
       <Link to={"/library/account"}>
         <button
           title={"Account"}

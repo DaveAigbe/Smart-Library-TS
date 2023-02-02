@@ -2,7 +2,7 @@ import React, { FunctionComponent, useEffect } from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import FormBackground from "../../../../components/FormBackground";
+import FormActiveBackground from "../../../../components/FormActiveBackground";
 import SubmitFormButton from "../../../../components/SubmitFormButton";
 import { useDispatch, useSelector } from "react-redux";
 import { addGenre, selectGenres } from "../../../../store/slices/librarySlice";
@@ -56,9 +56,9 @@ const AddGenreFormModal: FunctionComponent<Props> = ({ toggleFormActive }) => {
 
   return (
     <div>
-      <FormBackground closeForm={toggleFormActive}>
+      <FormActiveBackground closeElement={toggleFormActive}>
         <form
-          className={"relative z-50 w-96 rounded  bg-brown-400 p-3"}
+          className={"relative z-50 w-fit rounded bg-brown-400 p-3 md:w-96"}
           onSubmit={handleSubmit(handleSubmitGenre)}
         >
           <label className={"text-md mb-2 block text-main-txt"} htmlFor="genre">
@@ -84,7 +84,7 @@ const AddGenreFormModal: FunctionComponent<Props> = ({ toggleFormActive }) => {
           </section>
           <CloseFormButton closeForm={toggleFormActive} />
         </form>
-      </FormBackground>
+      </FormActiveBackground>
     </div>
   );
 };

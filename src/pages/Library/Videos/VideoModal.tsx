@@ -9,7 +9,7 @@ const VideoModal: FunctionComponent<Props> = ({ id, toggleVideoActive }) => {
   return (
     <figure
       className={
-        "fixed inset-y-0 inset-x-0 z-20 flex items-center justify-center bg-gray-600/25  p-5 backdrop-blur-md"
+        "fixed inset-y-0 inset-x-0 z-20 flex items-center justify-center bg-gray-600/25 p-5 backdrop-blur-md"
       }
       onClick={toggleVideoActive}
     >
