@@ -10,7 +10,7 @@ const NavLogo: FunctionComponent<Props> = () => {
     <Link to={"/"}>
       <section
         className={
-          "mr-2 flex items-center justify-center gap-2 text-2xl text-main-txt"
+          "mr-2 flex items-center justify-center gap-2 text-lg text-main-txt md:text-2xl"
         }
       >
         <h2>Smart Library</h2>
