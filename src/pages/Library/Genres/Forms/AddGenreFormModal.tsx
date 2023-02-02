@@ -58,7 +58,9 @@ const AddGenreFormModal: FunctionComponent<Props> = ({ toggleFormActive }) => {
     <div>
       <FormActiveBackground closeElement={toggleFormActive}>
         <form
-          className={"relative z-50 w-fit rounded bg-brown-400 p-3 md:w-96"}
+          className={
+            "relative z-50 w-fit rounded bg-brown-400 p-3 shadow-2xl shadow-gray-900 md:w-96"
+          }
           onSubmit={handleSubmit(handleSubmitGenre)}
         >
           <label className={"text-md mb-2 block text-main-txt"} htmlFor="genre">

@@ -58,7 +58,7 @@ const AddVideoToGenreFormModal: FunctionComponent<Props> = ({
     <FormActiveBackground closeElement={toggleFormActive}>
       <form
         className={
-          "relative z-20 rounded bg-brown-400  py-2.5 pl-2.5 pr-16 text-lg text-main-txt"
+          "relative z-20 rounded bg-brown-400 py-2.5 pl-2.5  pr-16 text-lg text-main-txt shadow-2xl shadow-gray-900"
         }
         onSubmit={handleSubmit(handleAddVideoGenresForm)}
       >
