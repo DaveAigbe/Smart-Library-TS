@@ -10,6 +10,7 @@
   },
   "homepage": "",
   "scripts": {
+    "start": "vite",
     "dev": "vite",
     "codegen": "graphql-codegen"
   },
