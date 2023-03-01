@@ -12,6 +12,14 @@ import LibraryPage from "./pages/Library/LibraryPage";
 import AccountPage from "./pages/Account/AccountPage";
 import HomePage from "./pages/Home/HomePage";
 import Layout from "./layouts/Layout";
+import {
+  ApolloClient,
+  ApolloProvider,
+  HttpLink,
+  InMemoryCache,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import { getStorageWithExpiry } from "./utils/getStorageWithExpiry";
 
 const router = createBrowserRouter([
   {
@@ -69,10 +77,33 @@ const router = createBrowserRouter([
   },
 ]);
 
+const httpLink = new HttpLink({
+  uri: "https://smart-library-backend-production.up.railway.app/",
+});
+
+const authLink = setContext((_, { headers }) => {
+  const authToken = getStorageWithExpiry("authToken");
+
+  return {
+    headers: {
+      ...headers,
+      authorization: authToken ? `Bearer ${authToken}` : "",
+    },
+  };
+});
+
+export const client = new ApolloClient({
+  uri: "https://smart-library-backend-production.up.railway.app/",
+  cache: new InMemoryCache(),
+  link: authLink.concat(httpLink),
+});
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
+    </ApolloProvider>
   </React.StrictMode>
 );

@@ -1,107 +1,76 @@
 import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
-import { User } from "../../types/User";
+import { Library, User } from "../../types/Types";
 import { RootState } from "../store";
+import { defaultVideos } from "../../data/defaults";
 
 interface InitialState {
   user: User;
   authorized: boolean;
-  authDB: {
-    [email: string]: { username: string; password: string; videos: {} };
-  };
 }
 
-interface LoginPayload {
+interface AuthenticatedPayload {
   email: string;
-  password: string;
-}
-
-interface RegisterPayload {
   username: string;
-  email: string;
-  password: string;
+  library: Library;
+  createdAt: string;
 }
 
 const initialState: InitialState = {
   user: {},
   authorized: false,
-  authDB: {
-    "test1@gmail.com": {
-      username: "Tester1",
-      password: "test1231",
-      videos: {},
-    },
-    "test2@gmail.com": {
-      username: "Tester2",
-      password: "test1232",
-      videos: {},
-    },
-    "test3@gmail.com": {
-      username: "Tester3",
-      password: "test1233",
-      videos: {},
-    },
-    "test4@gmail.com": {
-      username: "Tester4",
-      password: "test1234",
-      videos: {},
-    },
-  },
 };
 
 export const userSlice: Slice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<LoginPayload>) => {
-      if (action.payload.email in state.authDB) {
-        if (
-          action.payload.password ===
-          state.authDB[action.payload.email].password
-        ) {
-          state.user = {
-            email: action.payload.email,
-            username: state.authDB[action.payload.email].username,
-            videos: state.authDB[action.payload.email].videos,
-          };
-          state.authorized = true;
-        }
-      }
-    },
-    registration: (state, action: PayloadAction<RegisterPayload>) => {
-      state.authDB[action.payload.email] = {
-        username: action.payload.username,
-        password: action.payload.password,
-        videos: {},
-      };
+    login: (state, action: PayloadAction<AuthenticatedPayload>) => {
       state.user = {
         email: action.payload.email,
         username: action.payload.username,
-        videos: {},
+        createdAt: action.payload.createdAt,
+        library: action.payload.library,
+      };
+      state.authorized = true;
+    },
+    signup: (state, action: PayloadAction<AuthenticatedPayload>) => {
+      state.user = {
+        email: action.payload.email,
+        username: action.payload.username,
+        createdAt: action.payload.createdAt,
+        library: defaultVideos,
       };
       state.authorized = true;
     },
     logout: (state, action: PayloadAction<{}>) => {
-      state.authorized = false;
-      state.user = {};
+      Object.assign(state, initialState);
     },
   },
 });
 
 // Selectors
-export const selectIsAuthenticated = (state: RootState) => {
+export const selectIsAuthenticated = (state: RootState): boolean => {
   return state.user.authorized;
 };
 
-export const selectUsername = (state: RootState) => {
+export const selectUsername = (state: RootState): string => {
   return state.user.user.username;
 };
 
-export const selectEmail = (state: RootState) => {
+export const selectEmail = (state: RootState): string => {
   return state.user.user.email;
+};
+
+export const selectDatabaseLibrary = (state: RootState): Library => {
+  return state.user.user.library;
+};
+
+export const selectAccountCreationDate = (state: RootState): Date => {
+  return new Date(state.user.user.createdAt);
 };
 
 // Reducers as actions
 
-export const { login, logout, registration } = userSlice.actions;
+export const { login, logout, signup } = userSlice.actions;
 
 export default userSlice.reducer;

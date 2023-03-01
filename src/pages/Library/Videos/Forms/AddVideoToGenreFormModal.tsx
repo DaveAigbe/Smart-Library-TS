@@ -10,8 +10,7 @@ import {
   selectLibrary,
 } from "../../../../store/slices/librarySlice";
 import Checkbox from "./Checkbox";
-import { Genres } from "../../../../types/Genres";
-import { Library } from "../../../../types/Library";
+import { Genres, Library } from "../../../../types/Types";
 
 interface Props {
   toggleFormActive: (state?: boolean) => void;
@@ -31,7 +30,7 @@ const AddVideoToGenreFormModal: FunctionComponent<Props> = ({
   const genres: Genres = useSelector(selectGenres);
   const dispatch = useDispatch();
 
-  const uniqueGenres = genres.filter((genre) => genre !== "all");
+  const uniqueGenres = genres.filter((genre: string) => genre !== "all");
 
   const getDefaultChecks = (): AddToGenreFormData => {
     const defaultChecks: AddToGenreFormData = {};

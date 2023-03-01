@@ -9,7 +9,7 @@ import { addGenre, selectGenres } from "../../../../store/slices/librarySlice";
 import CloseFormButton from "../../../../components/CloseFormButton";
 import FormError from "../../../../components/FormError";
 import { isUniqueValue } from "../../../../utils/isUniqueValue";
-import { Genres } from "../../../../types/Genres";
+import { Genres } from "../../../../types/Types";
 
 interface Props {
   toggleFormActive: (state?: boolean) => void;

@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { Library } from "../../types/Library";
-import { Genres } from "../../types/Genres";
+import { Genres, Library } from "../../types/Types";
 import { AddToGenreFormData } from "../../pages/Library/Videos/Forms/AddVideoToGenreFormModal";
 
 interface InitialState {
@@ -9,6 +8,7 @@ interface InitialState {
   currentGenre: string;
   genres: Genres;
   isInitialState: boolean;
+  isLibraryUpToDate: boolean;
 }
 
 interface DeleteVideoPayload {
@@ -26,6 +26,7 @@ const initialState: InitialState = {
   library: { all: { ids: [] } },
   genres: ["all"],
   isInitialState: true,
+  isLibraryUpToDate: true,
 };
 
 export const librarySlice: Slice = createSlice({
@@ -47,8 +48,8 @@ export const librarySlice: Slice = createSlice({
         ];
       }
 
-      // Update Storage
-      localStorage.setItem("library", JSON.stringify(state.library));
+      // Indicate mutation
+      state.isLibraryUpToDate = false;
     },
     deleteVideo: (state, action: PayloadAction<DeleteVideoPayload>) => {
       // If in all genre, filter from all categories
@@ -64,8 +65,8 @@ export const librarySlice: Slice = createSlice({
         ].ids.filter((id: string) => action.payload.id !== id);
       }
 
-      // Update Storage
-      localStorage.setItem("library", JSON.stringify(state.library));
+      // Indicate mutation
+      state.isLibraryUpToDate = false;
     },
     changeGenre: (state, action: PayloadAction<keyof typeof state.library>) => {
       state.currentGenre = action.payload;
@@ -74,8 +75,8 @@ export const librarySlice: Slice = createSlice({
       state.genres = [...state.genres, action.payload];
       state.library = { ...state.library, [action.payload]: { ids: [] } };
 
-      // Update Storage
-      localStorage.setItem("library", JSON.stringify(state.library));
+      // Indicate mutation
+      state.isLibraryUpToDate = false;
     },
     deleteGenre: (state, action: PayloadAction<string>) => {
       if (action.payload !== "all") {
@@ -91,8 +92,8 @@ export const librarySlice: Slice = createSlice({
         }
       }
 
-      // Update Storage
-      localStorage.setItem("library", JSON.stringify(state.library));
+      // Indicate mutation
+      state.isLibraryUpToDate = false;
     },
     addVideoToGenre: (state, action: PayloadAction<AddToGenrePayload>) => {
       const uniqueGenres: string[] = state.genres.filter(
@@ -116,8 +117,14 @@ export const librarySlice: Slice = createSlice({
         }
       });
 
-      // Update Storage
-      localStorage.setItem("library", JSON.stringify(state.library));
+      // Indicate mutation
+      state.isLibraryUpToDate = false;
+    },
+    setLibraryToUpdated: (state, action) => {
+      state.isLibraryUpToDate = true;
+    },
+    resetLibrary: (state, action) => {
+      Object.assign(state, initialState);
     },
   },
 });
@@ -138,10 +145,25 @@ export const selectCurrentGenre = (state: RootState): string => {
   return state.library.currentGenre;
 };
 
-export const selectGenres = (state: RootState): Genres => state.library.genres;
+export const selectGenres = (state: RootState): Genres => {
+  return state.library.genres;
+};
 
-export const selectIsInitialState = (state: RootState): boolean =>
-  state.library.isInitialState;
+export const selectGenresCount = (state: RootState): number => {
+  return state.library.genres.length;
+};
+
+export const selectVideosCount = (state: RootState): number => {
+  return state.library.library.all.ids.length;
+};
+
+export const selectIsInitialState = (state: RootState): boolean => {
+  return state.library.isInitialState;
+};
+
+export const selectIsLibraryUpToDate = (state: RootState): boolean => {
+  return state.library.isLibraryUpToDate;
+};
 
 // Export all reducers as actions
 export const {
@@ -152,6 +174,8 @@ export const {
   addGenre,
   deleteGenre,
   addVideoToGenre,
+  setLibraryToUpdated,
+  resetLibrary,
 } = librarySlice.actions;
 
 // Export reducer object to be added to store

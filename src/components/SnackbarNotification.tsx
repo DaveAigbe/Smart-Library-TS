@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { NotificationState } from "../types/NotificationState";
+import { NotificationState } from "../types/Types";
 
 interface Props {
   message: string;
@@ -13,7 +13,7 @@ const NotificationItems = {
     symbol: "✔",
   },
   warning: {
-    color: "#EDE04D",
+    color: "#cbbf41",
     symbol: "⚠",
   },
   error: {

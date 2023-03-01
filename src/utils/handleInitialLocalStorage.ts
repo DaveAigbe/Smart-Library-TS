@@ -1,6 +1,6 @@
-import defaultVideos from "../data/defaults";
+import { defaultVideos } from "../data/defaults";
 import { setInitialLibrary } from "../store/slices/librarySlice";
-import { Library } from "../types/Library";
+import { Library } from "../types/Types";
 import { Dispatch } from "@reduxjs/toolkit";
 
 /*
@@ -8,7 +8,7 @@ import { Dispatch } from "@reduxjs/toolkit";
  * 2. If the local storage has no videos and the state is null, then use defaultVideos to update 'videos' in local storage & current 'videos' from state
  * */
 
-const handleVideosLocalStorage = (
+export const handleInitialLocalStorage = (
   allVideos: Library,
   dispatch: Dispatch,
   isInitial: boolean
@@ -24,5 +24,3 @@ const handleVideosLocalStorage = (
     localStorage.setItem("library", JSON.stringify(defaultVideos));
   }
 };
-
-export default handleVideosLocalStorage;

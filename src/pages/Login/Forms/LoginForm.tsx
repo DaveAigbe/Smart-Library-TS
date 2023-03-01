@@ -1,15 +1,26 @@
-import React, { FunctionComponent, useEffect } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import ButtonDivider from "../ButtonDivider";
 import FormButton from "../Buttons/FormButton";
 import { useDispatch } from "react-redux";
-import { login } from "../../../store/slices/userSlice";
 import FormError from "../../../components/FormError";
+import { FetchResult, useMutation } from "@apollo/client";
+import { login } from "../../../store/slices/userSlice";
+import { User } from "../../../gql/graphql";
+import { setStorageWithExpiry } from "../../../utils/setStorageWithExpiry";
+import { loginMutation } from "../../../gql/Mutations";
+import { isUniqueValue } from "../../../utils/isUniqueValue";
+import SnackbarNotification from "../../../components/SnackbarNotification";
+import { timedNotification } from "../../../utils/timedNotification";
 
 interface Props {
   openRegistration: (state?: boolean) => void;
+}
+
+interface FetchPayload {
+  login: { uniqueToken: string; user: User };
 }
 
 interface FormData {
@@ -17,16 +28,14 @@ interface FormData {
   password: string;
 }
 
-const LoginForm: FunctionComponent<Props> = ({ openRegistration }) => {
-  const loginSchema = yup.object().shape({
-    email: yup
-      .string()
-      .email("⚠ Please enter a valid email address.")
-      .required(),
-    password: yup.string().required(),
-  });
+const loginSchema = yup.object().shape({
+  email: yup.string().email("⚠ Please enter a valid email address.").required(),
+  password: yup.string().required(),
+});
 
+const LoginForm: FunctionComponent<Props> = ({ openRegistration }) => {
   const dispatch = useDispatch();
+  const [serverLogin] = useMutation(loginMutation);
   const {
     register,
     handleSubmit,
@@ -35,10 +44,32 @@ const LoginForm: FunctionComponent<Props> = ({ openRegistration }) => {
   } = useForm<FormData>({
     resolver: yupResolver(loginSchema),
   });
+  const [successfulServerLogin, setSuccessfulServerLogin] =
+    useState<boolean>(false);
 
-  const handleSubmitLogin = (data: FormData) => {
-    const loginInfo = { email: data.email, password: data.password };
-    dispatch(login(loginInfo));
+  const handleSubmitLogin = async (formData: FormData) => {
+    const loginInfo = { email: formData.email, password: formData.password };
+
+    await serverLogin({ variables: loginInfo })
+      .then((data: FetchResult<FetchPayload>) => {
+        setStorageWithExpiry(
+          "authToken",
+          data.data?.login.uniqueToken,
+          5259600000
+        );
+
+        dispatch(
+          login({
+            email: data.data?.login.user.email,
+            username: data.data?.login.user.username,
+            library: JSON.parse(data.data?.login.user.library.data!),
+            createdAt: data.data?.login.user.createdAt,
+          })
+        );
+      })
+      .catch((err) => {
+        timedNotification(setSuccessfulServerLogin, 4);
+      });
   };
 
   useEffect(() => {
@@ -47,6 +78,11 @@ const LoginForm: FunctionComponent<Props> = ({ openRegistration }) => {
 
   return (
     <div className="container h-full px-6 py-12 ">
+      <SnackbarNotification
+        message={"You have entered an invalid username or password"}
+        state={"error"}
+        showNotification={successfulServerLogin}
+      />
       <div className="flex h-full flex-wrap items-center justify-center text-gray-800">
         <section className="mb-12 md:mb-0 md:w-8/12 lg:w-6/12">
           <img

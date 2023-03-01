@@ -1,13 +1,23 @@
 import React, { FunctionComponent } from "react";
 import NavButton from "../../../../components/NavButton";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../../store/slices/userSlice";
+import { resetLibrary } from "../../../../store/slices/librarySlice";
 
 interface Props {}
 
 const LoginButton: FunctionComponent<Props> = () => {
   const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+
+    dispatch(logout({}));
+    dispatch(resetLibrary({}));
+
+    window.location.reload();
+  };
 
   return (
     <Link to={"/login"}>
@@ -16,7 +26,7 @@ const LoginButton: FunctionComponent<Props> = () => {
         backgroundColor={"#d90000"}
         hoverBackgroundColor={"black"}
         labelColor={"main-pg"}
-        handleClick={() => dispatch(logout({}))}
+        handleClick={handleLogout}
       />
     </Link>
   );

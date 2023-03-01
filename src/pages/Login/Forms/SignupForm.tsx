@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import FormButton from "../Buttons/FormButton";
 import ButtonDivider from "../ButtonDivider";
 import { useForm } from "react-hook-form";
@@ -6,7 +6,13 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormError from "../../../components/FormError";
 import { useDispatch } from "react-redux";
-import { registration } from "../../../store/slices/userSlice";
+import { signup } from "../../../store/slices/userSlice";
+import { FetchResult, gql, useMutation } from "@apollo/client";
+import { User } from "../../../gql/graphql";
+import { setStorageWithExpiry } from "../../../utils/setStorageWithExpiry";
+import { signupMutation } from "../../../gql/Mutations";
+import { timedNotification } from "../../../utils/timedNotification";
+import SnackbarNotification from "../../../components/SnackbarNotification";
 
 interface Props {
   closeRegistration: (state?: boolean) => void;
@@ -19,7 +25,11 @@ interface FormData {
   confirmPassword: string;
 }
 
-const registerSchema = yup.object().shape({
+interface FetchPayload {
+  signup: { uniqueToken: string; user: User };
+}
+
+const signupSchema = yup.object().shape({
   email: yup.string().email("⚠ Please enter a valid email address.").required(), // Test that checks if email exists
   username: yup.string().required(), // Check that test if username exists
   password: yup
@@ -31,22 +41,41 @@ const registerSchema = yup.object().shape({
     .oneOf([yup.ref("password")], "⚠ Passwords do not match"), // Validate that passwords match
 });
 
-const RegisterForm: FunctionComponent<Props> = ({ closeRegistration }) => {
+const SignupForm: FunctionComponent<Props> = ({ closeRegistration }) => {
+  const dispatch = useDispatch();
+  const [serverSignup] = useMutation(signupMutation);
   const {
     setFocus,
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({ resolver: yupResolver(registerSchema) });
-  const dispatch = useDispatch();
+  } = useForm<FormData>({ resolver: yupResolver(signupSchema) });
+  const [successfulServerSignup, setSuccessfulServerSignup] =
+    useState<boolean>(false);
 
-  const handleSubmitRegistration = (data: FormData) => {
-    const registrationInfo = {
-      email: data.email,
-      username: data.username,
-      password: data.password,
+  const handleSubmitSignup = async (formData: FormData) => {
+    const signupInfo = {
+      email: formData.email,
+      username: formData.username,
+      password: formData.password,
     };
-    dispatch(registration(registrationInfo));
+
+    serverSignup({ variables: signupInfo })
+      .then((data: FetchResult<FetchPayload>) => {
+        const authToken = data.data?.signup.uniqueToken;
+        setStorageWithExpiry("authToken", authToken, 5259600000);
+
+        dispatch(
+          signup({
+            email: formData.email,
+            username: formData.username,
+            createdAt: data.data?.signup.user.createdAt,
+          })
+        );
+      })
+      .catch((err) => {
+        timedNotification(setSuccessfulServerSignup, 4);
+      });
   };
 
   useEffect(() => {
@@ -55,6 +84,11 @@ const RegisterForm: FunctionComponent<Props> = ({ closeRegistration }) => {
 
   return (
     <div className="container h-full px-6 py-12">
+      <SnackbarNotification
+        message={"The email address provided is already in use"}
+        state={"warning"}
+        showNotification={successfulServerSignup}
+      />
       <div className="g-6 flex h-full flex-wrap items-center justify-center text-gray-800">
         <section className="mb-12 md:mb-0 md:w-8/12 lg:w-6/12">
           <img
@@ -69,11 +103,11 @@ const RegisterForm: FunctionComponent<Props> = ({ closeRegistration }) => {
               "mb-2 text-4xl font-bold tracking-wider text-main-header"
             }
           >
-            Register
+            Signup
           </h2>
           <form
             className={"flex flex-col gap-6"}
-            onSubmit={handleSubmit(handleSubmitRegistration)}
+            onSubmit={handleSubmit(handleSubmitSignup)}
           >
             <section>
               <input
@@ -137,4 +171,4 @@ const RegisterForm: FunctionComponent<Props> = ({ closeRegistration }) => {
   );
 };
 
-export default RegisterForm;
+export default SignupForm;

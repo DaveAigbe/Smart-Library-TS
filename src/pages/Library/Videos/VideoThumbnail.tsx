@@ -30,7 +30,10 @@ const VideoThumbnail: FunctionComponent<Props> = ({
         className={
           "aspect-ratio cursor-pointer rounded-2xl md:h-186  c-md:h-214  lg:h-259  c-xl:h-315 "
         }
-        src={`https://i.ytimg.com/vi/${id}/maxresdefault.jpg`}
+        src={
+          `https://i.ytimg.com/vi/${id}/maxresdefault.jpg` ||
+          `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
+        }
         alt="Youtube video thumbnail"
       />
       <section>

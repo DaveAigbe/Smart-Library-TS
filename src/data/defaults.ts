@@ -1,6 +1,6 @@
-import { Library } from "../types/Library";
+import { Library } from "../types/Types";
 
-const defaultVideos: Library = {
+export const defaultVideos: Library = {
   all: {
     ids: [
       "DmxzHJ3lq6U",
@@ -45,5 +45,3 @@ const defaultVideos: Library = {
     ],
   },
 };
-
-export default defaultVideos;

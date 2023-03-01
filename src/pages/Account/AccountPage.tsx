@@ -49,7 +49,9 @@ const AccountPage: FunctionComponent<Props> = () => {
           </button>
         </div>
       </section>
-      <section className={"flex w-full items-center justify-center "}>
+      <section
+        className={"flex w-full -translate-y-4 items-center justify-center "}
+      >
         {editUserFormActive ? <EditUserForm /> : <UserInformation />}
       </section>
     </section>

@@ -10,6 +10,7 @@ import { isUniqueValue } from "../../../utils/isUniqueValue";
 import AddVideoTooltip from "../AddVideoTooltip";
 import SnackbarNotification from "../../../components/SnackbarNotification";
 import { timedNotification } from "../../../utils/timedNotification";
+import { getVideoId } from "../../../utils/getVideoId";
 
 interface Props {}
 
@@ -26,6 +27,7 @@ const AddVideoForm: FunctionComponent<Props> = () => {
   const videoIDSchema = yup.object().shape({
     videoID: yup
       .string()
+      .transform((value) => getVideoId(value))
       .length(11, "⚠ ID must be 11 characters")
       .required()
       .test({
@@ -37,18 +39,18 @@ const AddVideoForm: FunctionComponent<Props> = () => {
   const {
     register,
     handleSubmit,
-    setValue,
+    reset,
     formState: { isDirty, errors },
   } = useForm<FormData>({
     defaultValues: { videoID: "" },
     resolver: yupResolver(videoIDSchema),
   });
 
-  const handleSubmitVideo = (data: FormData) => {
-    const id = data.videoID;
+  const handleSubmitVideo = async (formData: FormData) => {
+    const id = formData.videoID;
     dispatch(addVideo(id));
 
-    setValue("videoID", "");
+    reset();
     timedNotification(setAddVideoNotification, 4);
   };
 

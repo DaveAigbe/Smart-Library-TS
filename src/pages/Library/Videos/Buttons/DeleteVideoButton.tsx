@@ -6,7 +6,7 @@ import {
   selectCurrentGenre,
   selectGenres,
 } from "../../../../store/slices/librarySlice";
-import { Genres } from "../../../../types/Genres";
+import { Genres } from "../../../../types/Types";
 import TitleCase from "../../../../utils/titleCase";
 
 interface Props {
