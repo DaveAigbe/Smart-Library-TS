@@ -11,13 +11,13 @@
 - Watch videos without leaving the site, allows for more focused learning without the distractions recommended videos or ads
 - Add new 'genres' which store related videos
 - Add and remove videos from existing genres or from the library completely
+- login and sign-up capability
+- User authentication
+- GraphQL Server Backend
 
 ## Planned Features
 
-- LoginPage and sign-up capability
-- User authentication
 - Various sorting methods, such as by date or length of video
-- REST API Backend to store videos
 - 'Genre' routing
 - Cohesive animations
 
