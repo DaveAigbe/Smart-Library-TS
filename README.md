@@ -27,6 +27,7 @@
 - CSS
 - Tailwind
 - Redux State management
+- GraphQL
 ## Packages
 - Yup: Schema Builder and form input validation
 - React-router: Routing
