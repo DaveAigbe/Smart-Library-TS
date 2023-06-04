@@ -1,6 +1,6 @@
 # Smart Library
 
-#### Smart LibraryPage is a collection of all the video resources for various topics collected and organized in one place!
+#### Smart Library is a collection of all the video resources for various topics collected and organized in one place!
 ![image](https://user-images.githubusercontent.com/90881175/215264476-701f116b-90d6-47b1-b36b-392d4c1ab03a.png)
 
 
